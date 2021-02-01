@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Mandate-Mapper">
+
+	<resultMap type="HashMap" id="mandateMap">
+		<id column="mdt_no" property="mdt_no"/>
+		<id column="mdt_empid" property="mdt_empid"/>
+		<id column="mdt_mdtr" property="mdt_mdtr"/>
+		<id column="mdt_reason" property="mdt_reason"/>
+		<id column="mdt_satymd" property="mdt_satymd"/>
+		<id column="mdt_endymd" property="mdt_endymd"/>
+		<id column="mdt_ymd" property="mdt_ymd"/>
+		<id column="mdt_actvyn" property="mdt_actvyn"/>
+		<id column="mdt_deptnm" property="mdt_deptnm"/>
+		<id column="emp_nm" property="emp_nm"/>
+	</resultMap>
+	
+	<select id="selectMdtListById" resultMap="mandateMap">
+		SELECT 
+			mandate.mdt_no,
+		    mandate.mdt_empid,
+		    mandate.mdt_mdtr,
+		    mandate.mdt_reason,
+		    mandate.mdt_satymd,
+		    mandate.mdt_endymd,
+		    mandate.mdt_ymd,
+		    mandate.mdt_actvyn,
+		    mandate.mdt_deptnm,
+		    (select employee.emp_nm from employee where employee.emp_id = mandate.mdt_mdtr) emp_nm
+		FROM mandate, employee
+		WHERE mandate.mdt_empid = employee.emp_id AND mdt_empid = #{id}
+		ORDER BY mdt_ymd DESC
+	</select>
+	
+	<update id="updateActvyn">
+		UPDATE mandate SET mdt_actvyn = 'n'
+		WHERE mdt_no IN 
+		<foreach collection="list" item="unset" open="(" close=")" separator=",">
+			#{unset}
+		</foreach>
+	</update>
+	
+	<update id="insertMandate">
+		INSERT INTO mandate (mdt_no, mdt_empid, mdt_mdtr, mdt_reason, mdt_satymd, mdt_endymd, mdt_ymd, mdt_actvyn, mdt_deptnm) 
+		VALUES (
+		    mandate_seq.NEXTVAL,
+		    #{mdt_empid},
+		    #{mdt_mdtr},
+		    #{mdt_reason},
+		    #{mdt_satymd},
+		    #{mdt_endymd},
+		    SYSDATE,
+		    'y',
+		    #{mdt_deptnm}
+		)
+	</update>
+	
+	<update id="updateEndActvyn">
+		update mandate set mdt_actvyn = 'n' 
+		where to_char(mdt_endymd, 'yy-MM-dd') = to_char(sysdate-1, 'yy-MM-dd')
+	</update>
+	
+	<select id="selectTodayMandateList" resultType="mandate">
+		SELECT MANDATE.*
+		FROM MANDATE
+		WHERE TO_DATE(TO_CHAR(MDT_SATYMD,'YYYYMMDD'),'YYYYMMDD') &lt;= TO_DATE(TO_CHAR(sysdate,'YYYYMMDD'),'YYYYMMDD')
+		AND TO_DATE(TO_CHAR(MDT_ENDYMD,'YYYYMMDD'),'YYYYMMDD') &gt;= TO_DATE(TO_CHAR(sysdate,'YYYYMMDD'),'YYYYMMDD')
+		AND MDT_ACTVYN = 'Y'
+	</select>
+	
+	<select id="selectYesterdayEndMandate" resultType="mandate">
+		SELECT MANDATE.*
+		FROM MANDATE
+		WHERE TO_DATE(TO_CHAR(MDT_ENDYMD,'YYYYMMDD'),'YYYYMMDD') = TO_DATE(TO_CHAR(sysdate-1,'YYYYMMDD'),'YYYYMMDD')
+		AND MDT_ACTVYN = 'Y'
+	</select>
+	<select id="selectAprvByEmpId" resultType="aprv">
+		SELECT *
+		FROM APPROVAL
+		WHERE APRV_EMPID = #{empid}
+	</select>
+	<select id="selectConsByEmpId" resultType="cons">
+		SELECT *
+		FROM CONSENSUS
+		WHERE CONS_EMPID = #{empid}
+	</select>
+	<update id="updateMandateAprv" parameterType="map">
+		UPDATE APPROVAL SET APRV_EMPID = #{mandate}, APRV_AS = #{code} WHERE APRV_EMPID = #{empid} AND APRV_AS IN('DAP01','DAP05','DAP31','DAP35')
+	</update>
+	
+	<update id="updateMandateCons" parameterType="map">
+		UPDATE CONSENSUS SET CONS_EMPID = #{mandate}, CONS_AGRESTT = #{code} WHERE CONS_EMPID = #{empid} AND CONS_AGRESTT IN('DAP11','DAP15','DAP21','DAP25')
+	</update>
+	
+	<update id="updateMandateAprvCancel" parameterType="map">
+		UPDATE APPROVAL SET APRV_EMPID = #{empid}, APRV_AS = #{code} WHERE APRV_EMPID = #{mandate} AND APRV_AS IN('DAP41','DAP45','DAP71','DAP75')
+	</update>
+	
+	<update id="updateMandateConsCancel" parameterType="map">
+		UPDATE CONSENSUS SET CONS_EMPID = #{empid}, CONS_AGRESTT = #{code} WHERE CONS_EMPID = #{mandate} AND CONS_AGRESTT IN('DAP51','DAP55','DAP61','DAP65')
+	</update>
+	
+</mapper>
+

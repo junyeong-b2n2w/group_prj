@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Component-Mapper">
+	
+	<select id="selectComponentList" resultType="component">
+		
+		select * from COMPONENT
+
+		order by CP_TAG, CP_CONT
+		
+	</select>
+	
+	<select id="selectComponentByCPNO" resultType="component">
+		
+		select * from COMPONENT
+
+		where cp_no = #{cp_no}
+		 
+	</select>
+
+	
+</mapper>

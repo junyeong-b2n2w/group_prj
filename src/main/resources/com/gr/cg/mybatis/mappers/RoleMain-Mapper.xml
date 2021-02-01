@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RoleMain-Mapper">
+
+
+	<sql id="search">
+		<if test="searchType == 'c'.toString()">
+			and comp_nm like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+
+	
+	
+	<select id="selectTodayEdocByCompNO" resultType="HashMap">
+		select today_count, yester_count, round( (yester_count/Decode(today_count,'0','1',today_count)) * 100  , 0) percent
+
+       from
+		(select count(*) as today_count
+		
+		    from ELECTRONICDOCUMENT, EMPLOYEE, COMPANY
+		    where EMPLOYEE.EMP_COMPNO = COMPANY.COMP_NO
+		    AND EMPLOYEE.EMP_ID = ELECTRONICDOCUMENT.ED_DFTR
+		    AND TO_CHAR(ELECTRONICDOCUMENT.ED_REGYMD,'YYYYMMDD') = TO_CHAR(sysdate,'YYYYMMDD')
+		    AND EMP_COMPNO = #{comp_no}
+		    AND ED_APRVSTT = #{type}) today ,
+		
+		(select count(*) as yester_count
+		
+		    from ELECTRONICDOCUMENT, EMPLOYEE, COMPANY
+		    where EMPLOYEE.EMP_COMPNO = COMPANY.COMP_NO
+		    AND EMPLOYEE.EMP_ID = ELECTRONICDOCUMENT.ED_DFTR
+		    AND TO_CHAR(ELECTRONICDOCUMENT.ED_REGYMD-1,'YYYYMMDD') = TO_CHAR(sysdate-1,'YYYYMMDD')
+		    AND EMP_COMPNO =  #{comp_no}
+		   AND ED_APRVSTT = #{type}) yester
+	</select>
+	
+	<select id="selectTodayTaskByCompNO" resultType="HashMap">
+		select today_count, yester_count, round( (yester_count/Decode(today_count,'0','1',today_count)) * 100  , 0) percent
+		from
+		
+		(select count(*) as today_count
+		
+		    from  EMPLOYEE, COMPANY,TASK
+		    where EMPLOYEE.EMP_COMPNO = COMPANY.COMP_NO
+		    AND EMPLOYEE.EMP_ID = TASK.TASK_EMPID
+		    AND TO_CHAR(TASK_REGDT,'YYYYMMDD') = TO_CHAR(sysdate,'YYYYMMDD')
+		    AND EMP_COMPNO = #{comp_no}
+		    AND TASK_STT = #{type}) today,
+		
+		(select count(*) as yester_count
+		
+		    from  EMPLOYEE, COMPANY,TASK
+		    where EMPLOYEE.EMP_COMPNO = COMPANY.COMP_NO
+		    AND EMPLOYEE.EMP_ID = TASK.TASK_EMPID
+		    AND TO_CHAR(TASK_REGDT-1,'YYYYMMDD') = TO_CHAR(sysdate-1,'YYYYMMDD')
+		    AND EMP_COMPNO = #{comp_no}
+		    AND TASK_STT = #{type}) yester
+	</select>
+	
+	<select id="selectTodayCalByCompNO" resultType="HashMap">
+	select *
+	from
+	(select count(*) today
+	    from CALENDAR, EMPLOYEE, COMPANY
+	    where EMPLOYEE.EMP_COMPNO = COMPANY.COMP_NO
+	    AND EMPLOYEE.EMP_ID = CALENDAR.CAL_ID
+	    AND sysdate BETWEEN CAL_SATDT and CAL_ENDDT 
+	    AND EMP_COMPNO = #{comp_no}) ,
+	
+	
+	
+	
+	(select count(*) today_regi
+	    from CALENDAR, EMPLOYEE, COMPANY
+	    where EMPLOYEE.EMP_COMPNO = COMPANY.COMP_NO
+	    AND EMPLOYEE.EMP_ID = CALENDAR.CAL_ID
+	    AND EMP_COMPNO = #{comp_no}
+	    AND TO_CHAR(calendar.cal_regdt  ,'YYYYMMDD') = TO_CHAR(sysdate,'YYYYMMDD') )
+	</select>
+	
+</mapper>

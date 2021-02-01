@@ -1,0 +1,2089 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.14" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" name="com.gr.cg.dao.AthurDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/AthurDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="251" x="10566" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="2" language="java" name="com.gr.cg.service.CalServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/CalServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="213" x="3813" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.gr.cg.controller.CompanyController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/CompanyController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="133" x="9431" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.gr.cg.dao.AprvFormDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/AprvFormDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="293" x="15343" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.gr.cg.controller.VacationController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/VacationController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="129" x="7925" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.gr.cg.dao.BoardDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/BoardDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="255" x="10965" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.gr.cg.dao.DeptDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/DeptDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="241" x="4333" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="8" language="java" name="com.gr.cg.dao.PostDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/PostDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="239" x="23081" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="9" language="java" name="com.gr.cg.service.AprvService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/AprvService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="231" x="8769" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="10" language="java" name="com.gr.cg.dao.AprvDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/AprvDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="245" x="9040" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="11" language="java" name="com.gr.cg.dao.CompanyDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/CompanyDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="287" x="9795" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="12" language="java" name="com.gr.cg.service.EmpService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/EmpService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="223" x="12107" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="13" language="java" name="com.gr.cg.service.PostService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/PostService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="225" x="23360" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="14" language="java" name="com.gr.cg.controller.CalController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/CalController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="113" x="3660" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="15" language="java" name="com.gr.cg.service.BDocService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/BDocService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="235" x="5464" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="16" language="java" name="com.gr.cg.service.AprvServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/AprvServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="231" x="8875" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="17" language="java" name="com.gr.cg.dao.NoticeDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/NoticeDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="257" x="21740" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="18" language="java" name="com.gr.cg.service.BDocServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/BDocServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="235" x="5323" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.gr.cg.controller.DeptController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/DeptController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="113" x="4881" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="com.gr.cg.controller.AthurController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/AthurController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="113" x="10244" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="com.gr.cg.controller.CommController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/CommController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="117" x="13815" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="22" language="java" name="com.gr.cg.service.ManDateService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/ManDateService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="267" x="22198" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="23" language="java" name="com.gr.cg.controller.CommIpController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/CommIpController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="127" x="16934" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="24" language="java" name="com.gr.cg.dao.CalDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/CalDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="227" x="3964" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="25" language="java" name="com.gr.cg.service.PollService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/PollService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="215" x="12439" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="26" language="java" name="com.gr.cg.dao.ServerDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/ServerDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="263" x="13065" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="com.gr.cg.dao.GChartDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/GChartDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="265" x="19234" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.gr.cg.dao.EmpDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/EmpDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="237" x="11695" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="29" language="java" name="com.gr.cg.service.EDocService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/EDocService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="233" x="6887" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="30" language="java" name="com.gr.cg.service.CompanyServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/CompanyServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="273" x="9604" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="com.gr.cg.dao.CalDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/CalDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="227" x="4066" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="com.gr.cg.dao.EDocDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/EDocDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="247" x="6460" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="33" language="java" name="com.gr.cg.service.ReplyService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/ReplyService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="237" x="20034" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="34" language="java" name="com.gr.cg.service.ServerService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/ServerService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="249" x="13516" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="35" language="java" name="com.gr.cg.dao.EmpDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/EmpDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="237" x="11830" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="36" language="java" name="com.gr.cg.dao.BDocDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/BDocDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="249" x="5034" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="com.gr.cg.controller.PollController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/PollController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="113" x="12388" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="com.gr.cg.service.RankServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/RankServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="231" x="6036" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="39" language="java" name="com.gr.cg.dao.BDocDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/BDocDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="249" x="5175" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="40" language="java" name="com.gr.cg.controller.EmpController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/EmpController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="113" x="12235" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="41" language="java" name="com.gr.cg.dao.DeptDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/DeptDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="241" x="4470" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="42" language="java" name="com.gr.cg.dao.AprvFormDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/AprvFormDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="293" x="15506" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="43" language="java" name="com.gr.cg.service.BoardServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/BoardServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="241" x="11260" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="com.gr.cg.controller.ServerController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/ServerController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="118" x="13657" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="45" language="java" name="com.gr.cg.dao.BoardDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/BoardDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="255" x="11109" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="46" language="java" name="com.gr.cg.service.RankService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/RankService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="231" x="6175" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="47" language="java" name="com.gr.cg.dao.AthurDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/AthurDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="251" x="10674" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="com.gr.cg.service.DeptServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/DeptServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="227" x="4614" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="com.gr.cg.service.CommonServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/CommonServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="265" x="14867" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="com.gr.cg.dao.RankDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/RankDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="245" x="5751" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="com.gr.cg.service.EDocServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/EDocServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="233" x="6747" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="com.gr.cg.service.WidgetServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/WidgetServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="249" x="7476" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="com.gr.cg.controller.ReplyController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/ReplyController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="113" x="19989" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="54" language="java" name="com.gr.cg.service.AprvFormService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/AprvFormService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="279" x="15839" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="55" language="java" name="com.gr.cg.controller.AprvLnController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/AprvLnController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="120" x="16170" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="56" language="java" name="com.gr.cg.dao.MemoDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/MemoDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="253" x="17852" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="57" language="java" name="com.gr.cg.dao.CommDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/CommDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="255" x="14144" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="58" language="java" name="com.gr.cg.service.CommonService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/CommonService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="265" x="15023" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="59" language="java" name="com.gr.cg.controller.NoticeController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/NoticeController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="116" x="21411" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="60" language="java" name="com.gr.cg.controller.AprvFormController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/AprvFormController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="135" x="15995" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="61" language="java" name="com.gr.cg.dao.CommonDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/CommonDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="279" x="14704" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="62" language="java" name="com.gr.cg.dao.PollDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/PollDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="229" x="12694" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="63" language="java" name="com.gr.cg.service.DeptService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/DeptService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="227" x="4751" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="64" language="java" name="com.gr.cg.service.NoticeService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/NoticeService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="243" x="21457" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="65" language="java" name="com.gr.cg.dao.ServerDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/ServerDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="263" x="13213" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="66" language="java" name="com.gr.cg.controller.RankController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/RankController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="113" x="6307" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="67" language="java" name="com.gr.cg.service.ShortCutServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/ShortCutServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="267" x="18606" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="68" language="java" name="com.gr.cg.service.TaskServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/TaskServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="227" x="20991" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="69" language="java" name="com.gr.cg.dao.AprvLnDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/AprvLnDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="269" x="16625" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="70" language="java" name="com.gr.cg.dao.AprvLnDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/AprvLnDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="269" x="16511" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="71" language="java" name="com.gr.cg.service.VacationServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/VacationServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="267" x="8094" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="72" language="java" name="com.gr.cg.dao.CommDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/CommDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="255" x="14253" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="73" language="java" name="com.gr.cg.dao.MemoDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/MemoDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="253" x="17709" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="74" language="java" name="com.gr.cg.controller.BDocController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/BDocController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="113" x="5598" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="75" language="java" name="com.gr.cg.dao.WidgetDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/WidgetDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="263" x="7173" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="76" language="java" name="com.gr.cg.controller.MemoController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/MemoController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="115" x="18281" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="77" language="java" name="com.gr.cg.service.CalService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/CalService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="213" x="3711" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="78" language="java" name="com.gr.cg.controller.EDocController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/EDocController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="113" x="7020" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="79" language="java" name="com.gr.cg.controller.WidgetController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/WidgetController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="120" x="7765" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="80" language="java" name="com.gr.cg.controller.ShortCutController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/ShortCutController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="130" x="18436" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="81" language="java" name="com.gr.cg.service.TaskService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/TaskService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="227" x="21128" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="82" language="java" name="com.gr.cg.service.CommIpService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/CommIpService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="257" x="16985" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="83" language="java" name="com.gr.cg.dao.WidgetDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/WidgetDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="263" x="7321" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="84" language="java" name="com.gr.cg.dao.ReplyDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/ReplyDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="251" x="20311" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="85" language="java" name="com.gr.cg.service.BoardService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/BoardService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="241" x="11404" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="86" language="java" name="com.gr.cg.service.PollServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/PollServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="215" x="12541" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="87" language="java" name="com.gr.cg.service.MemoServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/MemoServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="239" x="18002" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="88" language="java" name="com.gr.cg.controller.GChartController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/GChartController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="119" x="19830" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="89" language="java" name="com.gr.cg.service.MemoService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/MemoService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="239" x="18145" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="90" language="java" name="com.gr.cg.dao.VacationDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/VacationDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="281" x="8401" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="91" language="java" name="com.gr.cg.dao.CommonDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/CommonDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="279" x="14548" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="92" language="java" name="com.gr.cg.controller.ManDateController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/ManDateController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="130" x="22147" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="93" language="java" name="com.gr.cg.dao.GChartDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/GChartDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="265" x="19383" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="94" language="java" name="com.gr.cg.dao.CommIpDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/CommIpDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="271" x="17398" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="95" language="java" name="com.gr.cg.service.ReplyServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/ReplyServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="237" x="20142" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="96" language="java" name="com.gr.cg.service.WidgetService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/WidgetService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="249" x="7624" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="97" language="java" name="com.gr.cg.dao.EDocDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/EDocDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="247" x="6600" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="98" language="java" name="com.gr.cg.dao.VacationDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/VacationDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="281" x="8282" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="99" language="java" name="com.gr.cg.dao.TaskDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/TaskDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="241" x="20710" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="100" language="java" name="com.gr.cg.service.AprvLnServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/AprvLnServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="255" x="16330" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="101" language="java" name="com.gr.cg.service.ManDateServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/ManDateServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="267" x="22317" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="102" language="java" name="com.gr.cg.dao.ReplyDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/ReplyDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="251" x="20419" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="103" language="java" name="com.gr.cg.service.GChartService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/GChartService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="251" x="19688" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="104" language="java" name="com.gr.cg.service.CommService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/CommService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="241" x="13863" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="105" language="java" name="com.gr.cg.service.VacationService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/VacationService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="267" x="7975" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="106" language="java" name="com.gr.cg.controller.AprvController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/AprvController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="113" x="8722" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="107" language="java" name="com.gr.cg.dao.PollDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/PollDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="229" x="12796" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="108" language="java" name="com.gr.cg.dao.ManDateDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/ManDateDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="281" x="22624" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="109" language="java" name="com.gr.cg.service.PostServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/PostServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="225" x="23224" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="110" language="java" name="com.gr.cg.service.AthurServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/AthurServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="237" x="10397" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="111" language="java" name="com.gr.cg.service.CommIpServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/CommIpServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="257" x="17101" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="112" language="java" name="com.gr.cg.service.AthurService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/AthurService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="237" x="10289" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="113" language="java" name="com.gr.cg.service.CommServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/CommServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="241" x="13972" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="114" language="java" name="com.gr.cg.controller.TaskController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/TaskController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="113" x="21258" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="115" language="java" name="com.gr.cg.dao.ShortCutDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/ShortCutDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="281" x="18793" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="116" language="java" name="com.gr.cg.service.GChartServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/GChartServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="251" x="19539" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="117" language="java" name="com.gr.cg.dao.ManDateDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/ManDateDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="281" x="22505" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="118" language="java" name="com.gr.cg.dao.TaskDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/TaskDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="241" x="20847" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="119" language="java" name="com.gr.cg.service.ServerServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/ServerServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="249" x="13368" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="120" language="java" name="com.gr.cg.service.ShortCutService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/ShortCutService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="267" x="18486" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="121" language="java" name="com.gr.cg.service.AprvLnService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/AprvLnService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="255" x="16216" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="122" language="java" name="com.gr.cg.service.EmpServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/EmpServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="223" x="11972" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="123" language="java" name="com.gr.cg.service.NoticeServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/NoticeServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="243" x="21567" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="124" language="java" name="com.gr.cg.service.CompanyService" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/CompanyService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="273" x="9482" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="125" language="java" name="com.gr.cg.controller.CommonController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/CommonController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="131" x="15172" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="126" language="java" name="com.gr.cg.controller.BoardController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/BoardController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="114" x="11541" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="127" language="java" name="com.gr.cg.dao.NoticeDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/NoticeDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="257" x="21850" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="128" language="java" name="com.gr.cg.dao.PostDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/PostDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="239" x="22945" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="129" language="java" name="com.gr.cg.dao.CommIpDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/CommIpDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="271" x="17282" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="130" language="java" name="com.gr.cg.controller.PostController" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/controller/PostController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="113" x="23489" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="131" language="java" name="com.gr.cg.dao.RankDAO" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/RankDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="245" x="5890" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="132" language="java" name="com.gr.cg.service.AprvFormServiceImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/service/AprvFormServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="279" x="15676" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="133" language="java" name="com.gr.cg.dao.AprvDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/AprvDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="245" x="9146" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="134" language="java" name="com.gr.cg.dao.CompanyDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/CompanyDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="287" x="9917" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="135" language="java" name="com.gr.cg.dao.ShortCutDAOImpl" project="DDIT-CG" 
+    file="/DDIT-CG/src/main/java/com/gr/cg/dao/ShortCutDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="281" x="18913" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="136">    
+    <end type="SOURCE" refId="125" navigable="false">      
+      <attribute id="137" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="138" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="58" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="139">    
+    <end type="SOURCE" refId="108"/>    
+    <end type="TARGET" refId="117"/>  
+  </realization>  
+  <realization id="140">    
+    <end type="SOURCE" refId="51"/>    
+    <end type="TARGET" refId="29"/>  
+  </realization>  
+  <realization id="141">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="131"/>  
+  </realization>  
+  <association id="142">    
+    <end type="SOURCE" refId="113" navigable="false">      
+      <attribute id="143" name="commDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="144" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="57" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="145">    
+    <end type="SOURCE" refId="109"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="146">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="97"/>  
+  </realization>  
+  <association id="147">    
+    <end type="SOURCE" refId="76" navigable="false">      
+      <attribute id="148" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="149" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="89" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="150">    
+    <end type="SOURCE" refId="95" navigable="false">      
+      <attribute id="151" name="replyDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="152" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="84" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="153">    
+    <end type="SOURCE" refId="110"/>    
+    <end type="TARGET" refId="112"/>  
+  </realization>  
+  <realization id="154">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="93"/>  
+  </realization>  
+  <realization id="155">    
+    <end type="SOURCE" refId="90"/>    
+    <end type="TARGET" refId="98"/>  
+  </realization>  
+  <association id="156">    
+    <end type="SOURCE" refId="123" navigable="false">      
+      <attribute id="157" name="noticeDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="158" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="159">    
+    <end type="SOURCE" refId="75"/>    
+    <end type="TARGET" refId="83"/>  
+  </realization>  
+  <realization id="160">    
+    <end type="SOURCE" refId="113"/>    
+    <end type="TARGET" refId="104"/>  
+  </realization>  
+  <association id="161">    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="162" name="boardDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="163" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="164">    
+    <end type="SOURCE" refId="126" navigable="false">      
+      <attribute id="165" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="166" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="85" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="167">    
+    <end type="SOURCE" refId="86" navigable="false">      
+      <attribute id="168" name="pollDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="169" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="62" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="170">    
+    <end type="SOURCE" refId="109" navigable="false">      
+      <attribute id="171" name="postDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="172" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="173">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="174" name="aprvDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="175" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="176">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="35"/>  
+  </realization>  
+  <realization id="177">    
+    <end type="SOURCE" refId="128"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <association id="178">    
+    <end type="SOURCE" refId="106" navigable="false">      
+      <attribute id="179" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="180" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="181">    
+    <end type="SOURCE" refId="53" navigable="false">      
+      <attribute id="182" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="183" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="184">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="41"/>  
+  </realization>  
+  <association id="185">    
+    <end type="SOURCE" refId="116" navigable="false">      
+      <attribute id="186" name="gChartDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="187" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="93" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="188">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <association id="189">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="190" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="191" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="63" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="192">    
+    <end type="SOURCE" refId="122"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <association id="193">    
+    <end type="SOURCE" refId="66" navigable="false">      
+      <attribute id="194" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="195" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="46" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="196">    
+    <end type="SOURCE" refId="99"/>    
+    <end type="TARGET" refId="118"/>  
+  </realization>  
+  <association id="197">    
+    <end type="SOURCE" refId="48" navigable="false">      
+      <attribute id="198" name="deptDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="199" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="200">    
+    <end type="SOURCE" refId="116"/>    
+    <end type="TARGET" refId="103"/>  
+  </realization>  
+  <realization id="201">    
+    <end type="SOURCE" refId="95"/>    
+    <end type="TARGET" refId="33"/>  
+  </realization>  
+  <association id="202">    
+    <end type="SOURCE" refId="55" navigable="false">      
+      <attribute id="203" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="204" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="121" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="205">    
+    <end type="SOURCE" refId="71" navigable="false">      
+      <attribute id="206" name="vacationDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="207" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="98" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="208">    
+    <end type="SOURCE" refId="49"/>    
+    <end type="TARGET" refId="58"/>  
+  </realization>  
+  <association id="209">    
+    <end type="SOURCE" refId="87" navigable="false">      
+      <attribute id="210" name="memoDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="211" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="56" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="212">    
+    <end type="SOURCE" refId="101" navigable="false">      
+      <attribute id="213" name="manDateDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="214" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="117" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="215">    
+    <end type="SOURCE" refId="130" navigable="false">      
+      <attribute id="216" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="217" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="218">    
+    <end type="SOURCE" refId="68" navigable="false">      
+      <attribute id="219" name="taskDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="220" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="118" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="221">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="222">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="223" name="companyDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="224" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="225">    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="85"/>  
+  </realization>  
+  <realization id="226">    
+    <end type="SOURCE" refId="48"/>    
+    <end type="TARGET" refId="63"/>  
+  </realization>  
+  <association id="227">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="228" name="bDocDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="229" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="230">    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="96"/>  
+  </realization>  
+  <realization id="231">    
+    <end type="SOURCE" refId="72"/>    
+    <end type="TARGET" refId="57"/>  
+  </realization>  
+  <realization id="232">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="46"/>  
+  </realization>  
+  <association id="233">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="234" name="calDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="235" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="236">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="237" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="238" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="239">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="42"/>  
+  </realization>  
+  <realization id="240">    
+    <end type="SOURCE" refId="102"/>    
+    <end type="TARGET" refId="84"/>  
+  </realization>  
+  <realization id="241">    
+    <end type="SOURCE" refId="94"/>    
+    <end type="TARGET" refId="129"/>  
+  </realization>  
+  <association id="242">    
+    <end type="SOURCE" refId="114" navigable="false">      
+      <attribute id="243" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="244" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="81" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="245">    
+    <end type="SOURCE" refId="68"/>    
+    <end type="TARGET" refId="81"/>  
+  </realization>  
+  <association id="246">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="247" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="248" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="104" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="249">    
+    <end type="SOURCE" refId="111"/>    
+    <end type="TARGET" refId="82"/>  
+  </realization>  
+  <association id="250">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="251" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="252" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="112" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="253">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="254" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="255" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="256">    
+    <end type="SOURCE" refId="119" navigable="false">      
+      <attribute id="257" name="serverDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="258" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="65" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="259">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <association id="260">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="261" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="262" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="124" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="263">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="77"/>  
+  </realization>  
+  <realization id="264">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="65"/>  
+  </realization>  
+  <realization id="265">    
+    <end type="SOURCE" refId="132"/>    
+    <end type="TARGET" refId="54"/>  
+  </realization>  
+  <realization id="266">    
+    <end type="SOURCE" refId="107"/>    
+    <end type="TARGET" refId="62"/>  
+  </realization>  
+  <realization id="267">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <realization id="268">    
+    <end type="SOURCE" refId="134"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <association id="269">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="270" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="271" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="272">    
+    <end type="SOURCE" refId="127"/>    
+    <end type="TARGET" refId="17"/>  
+  </realization>  
+  <association id="273">    
+    <end type="SOURCE" refId="92" navigable="false">      
+      <attribute id="274" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="275" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="276">    
+    <end type="SOURCE" refId="91"/>    
+    <end type="TARGET" refId="61"/>  
+  </realization>  
+  <realization id="277">    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <association id="278">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="279" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="280" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="105" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="281">    
+    <end type="SOURCE" refId="67" navigable="false">      
+      <attribute id="282" name="shortCutDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="283" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="115" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="284">    
+    <end type="SOURCE" refId="69"/>    
+    <end type="TARGET" refId="70"/>  
+  </realization>  
+  <association id="285">    
+    <end type="SOURCE" refId="100" navigable="false">      
+      <attribute id="286" name="aprvLnDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="287" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="70" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="288">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="289" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="290" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="77" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="291">    
+    <end type="SOURCE" refId="132" navigable="false">      
+      <attribute id="292" name="aprvFormDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="293" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="42" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="294">    
+    <end type="SOURCE" refId="87"/>    
+    <end type="TARGET" refId="89"/>  
+  </realization>  
+  <realization id="295">    
+    <end type="SOURCE" refId="73"/>    
+    <end type="TARGET" refId="56"/>  
+  </realization>  
+  <association id="296">    
+    <end type="SOURCE" refId="110" navigable="false">      
+      <attribute id="297" name="athurDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="298" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="299">    
+    <end type="SOURCE" refId="49" navigable="false">      
+      <attribute id="300" name="commonDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="301" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="61" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="302">    
+    <end type="SOURCE" refId="59" navigable="false">      
+      <attribute id="303" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="304" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="64" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="305">    
+    <end type="SOURCE" refId="111" navigable="false">      
+      <attribute id="306" name="commIpDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="307" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="129" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="308">    
+    <end type="SOURCE" refId="135"/>    
+    <end type="TARGET" refId="115"/>  
+  </realization>  
+  <association id="309">    
+    <end type="SOURCE" refId="51" navigable="false">      
+      <attribute id="310" name="eDocDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="311" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="97" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="312">    
+    <end type="SOURCE" refId="101"/>    
+    <end type="TARGET" refId="22"/>  
+  </realization>  
+  <association id="313">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="314" name="widgetDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="315" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="83" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="316">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="39"/>  
+  </realization>  
+  <realization id="317">    
+    <end type="SOURCE" refId="119"/>    
+    <end type="TARGET" refId="34"/>  
+  </realization>  
+  <association id="318">    
+    <end type="SOURCE" refId="79" navigable="false">      
+      <attribute id="319" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="320" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="96" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="321">    
+    <end type="SOURCE" refId="88" navigable="false">      
+      <attribute id="322" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="323" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="103" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="324">    
+    <end type="SOURCE" refId="74" navigable="false">      
+      <attribute id="325" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="326" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="327">    
+    <end type="SOURCE" refId="78" navigable="false">      
+      <attribute id="328" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="329" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="330">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="124"/>  
+  </realization>  
+  <association id="331">    
+    <end type="SOURCE" refId="122" navigable="false">      
+      <attribute id="332" name="empDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="333" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="334">    
+    <end type="SOURCE" refId="71"/>    
+    <end type="TARGET" refId="105"/>  
+  </realization>  
+  <association id="335">    
+    <end type="SOURCE" refId="80" navigable="false">      
+      <attribute id="336" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="337" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="120" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="338">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="339" name="rankDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="340" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="131" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="341">    
+    <end type="SOURCE" refId="133"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="342">    
+    <end type="SOURCE" refId="100"/>    
+    <end type="TARGET" refId="121"/>  
+  </realization>  
+  <association id="343">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="344" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="345" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="82" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="346">    
+    <end type="SOURCE" refId="123"/>    
+    <end type="TARGET" refId="64"/>  
+  </realization>  
+  <association id="347">    
+    <end type="SOURCE" refId="60" navigable="false">      
+      <attribute id="348" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="349" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="350">    
+    <end type="SOURCE" refId="86"/>    
+    <end type="TARGET" refId="25"/>  
+  </realization>  
+  <realization id="351">    
+    <end type="SOURCE" refId="67"/>    
+    <end type="TARGET" refId="120"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

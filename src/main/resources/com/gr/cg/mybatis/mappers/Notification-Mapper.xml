@@ -1,0 +1,118 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Notification-Mapper">
+
+	<select id="countUnReadAlarm" parameterType="str" resultType="int">
+		SELECT COUNT(*) 
+		FROM NOTIFICATION
+		WHERE NOTI_RECID = #{noti_recid} AND NOTI_READYN = 'N'
+	</select>
+
+	<select id="countTotalAlarm" parameterType="str" resultType="int">
+		SELECT COUNT(*) 
+		FROM NOTIFICATION
+		WHERE NOTI_RECID = #{noti_recid}
+	</select>
+	
+	<select id="countNoticeAlarm" parameterType="str" resultType="int">
+		SELECT COUNT(*)
+		FROM NOTIFICATION
+		WHERE NOTI_RECID = #{noti_recid} AND ALARM_TYPE IN ('RegisterYes', 'RegisterNo', 'BoardReportYes', 'BoardReportNo', 'MemberReportYes', 'MemberReportNo'))
+	</select>
+	
+	<select id="selectMyAlarmListByReadYnIsN" parameterType="str" resultType="noti">
+		SELECT *
+			FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+			        FROM(
+						
+		
+		SELECT NOTI_NO, NOTI_CONT, NOTI_TYPE, 
+		   			NOTI_RECID, (SELECT EMP_NM FROM EMPLOYEE WHERE EMP_ID = NOTI_RECID) NOTI_RECNM,
+		   			NOTI_SENDID,(SELECT EMP_NM FROM EMPLOYEE WHERE EMP_ID = NOTI_SENDID) NOTI_SENDNM,
+		   			NOTI_REGDT, NOTI_READDT, NOTI_READYN, NOTI_CONTNO, NOTI_URL, NOTI_COMPNO
+		 FROM  NOTIFICATION
+		WHERE NOTI_RECID = #{searchno} AND NOTI_READYN = 'N'
+		ORDER BY ${orderby} ${asc}
+			)A  
+			WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>)
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+		
+	</select>
+	
+	<!-- 토스트 알림용 읽지 않은 알림 리스트 가져오기 -->
+	<select id="selectMyAlarmListByReadYnIsNull" parameterType="str" resultType="noti">
+		   SELECT NOTI_NO, NOTI_CONT, NOTI_TYPE, 
+		   			NOTI_RECID, (SELECT EMP_NM FROM EMPLOYEE WHERE EMP_ID = NOTI_RECID) NOTI_RECNM,
+		   			NOTI_SENDID,(SELECT EMP_NM FROM EMPLOYEE WHERE EMP_ID = NOTI_SENDID) NOTI_SENDNM,
+		   			NOTI_REGDT, NOTI_READDT, NOTI_READYN, NOTI_CONTNO, NOTI_URL, NOTI_COMPNO
+		  FROM  NOTIFICATION
+		  WHERE NOTI_RECID =  #{noti_recid} AND NOTI_READYN IS NULL
+		  ORDER BY NOTI_NO DESC
+	</select>
+	<!-- 읽음 여부가 null인 모든 알림 리스트 가져오기 -->
+	<select id="selectAllAlarmListByReadYnIsNull" resultType="noti">
+		   SELECT NOTI_NO, NOTI_CONT, NOTI_TYPE, 
+		   			NOTI_RECID, (SELECT EMP_NM FROM EMPLOYEE WHERE EMP_ID = NOTI_RECID) NOTI_RECNM,
+		   			NOTI_SENDID,(SELECT EMP_NM FROM EMPLOYEE WHERE EMP_ID = NOTI_SENDID) NOTI_SENDNM,
+		   			NOTI_REGDT, NOTI_READDT, NOTI_READYN, NOTI_CONTNO, NOTI_URL, NOTI_COMPNO
+		  FROM  NOTIFICATION
+		  WHERE NOTI_READYN IS NULL
+		  ORDER BY NOTI_NO DESC
+	</select>
+	
+	<update id="updateReadAllAlarm" parameterType="str">
+		UPDATE NOTIFICATION SET NOTI_READYN = 'Y' 
+		WHERE NOTI_RECID = #{noti_recid}	
+	</update>
+	
+<!-- 	<update id="updateReadAlarm" parameterType="noti"> -->
+<!-- 		UPDATE NOTIFICATION SET NOTI_READYN = 'Y'  -->
+<!-- 		WHERE NOTI_RECID = #{noti_recid} AND NOTI_NO = #{noti_no} -->
+<!-- 	</update> -->
+	<update id="updateReadAlarm" parameterType="noti">
+		UPDATE NOTIFICATION SET NOTI_READYN = #{noti_readyn} <if test="noti_readyn == 'Y'.toString()">,NOTI_READDT=SYSDATE</if>
+		WHERE NOTI_RECID = #{noti_recid} AND NOTI_NO = #{noti_no} 
+	</update>
+	<update id="saveNoticeAlarm" parameterType="noti">
+		INSERT INTO NOTIFICATION (NOTI_NO, NOTI_CONT, NOTI_TYPE, NOTI_REGDT, NOTI_READYN, NOTI_URL,NOTI_SENDID, NOTI_CONTNO,NOTI_COMPNO)
+		VALUES (#{noti_no}, #{noti_cont}, #{noti_type}, SYSDATE, 'N', #{nori_url}, #{noti_sendid}, #{noti_contno},#{noti_compno})
+	</update>
+	
+	
+	<select id="selectAlarmByNotiNO" parameterType="int" resultType="noti">
+		SELECT * FROM NOTIFICATION WHERE NOTI_NO =#{noti_no}
+	</select>
+	
+	
+	<delete id="deleteAlarm" parameterType="noti">
+		DELETE FROM NOTIFICATION 
+		WHERE NOTI_TYPE = #{noti_type} AND NOTI_SENDID = #{noti_sendid} AND NOTI_RECID = #{noti_recid} 
+		AND NOTI_CONTNO =  #{noti_contno}
+	</delete>
+	<delete id="deleteAlarmByScheduler" parameterType="int">
+		DELETE FROM NOTIFICATION  WHERE NOTI_NO = #{noti_no} 
+	</delete>
+	
+	<select id="selectAllListByReadYnIsY">
+		SELECT * FROM NOTIFICATION WHERE NOTI_READYN = 'Y'
+	</select>
+	<update id="insertAlramByScheduler" parameterType="noti" >
+	
+		INSERT INTO NOTIFICATION (
+		    NOTI_NO, NOTI_CONT,
+		    NOTI_TYPE,  NOTI_RECID,  NOTI_REGDT,
+		    <if test="noti_contno != null"> NOTI_CONTNO,</if>
+		    NOTI_URL,  NOTI_COMPNO
+		) VALUES (
+		 	NOTIFICATION_SEQ.NEXTVAL, #{noti_cont},
+		    #{noti_type},  #{noti_recid}, SYSDATE,
+		    <if test="noti_contno != null">#{ noti_contno},</if>
+		    #{noti_url,jdbcType=VARCHAR}, #{noti_compno}
+		)
+	</update>
+	<select id="selectNoificationSeq" resultType="int">
+		SELECT NOTIFICATION_SEQ.NEXTVAL FROM DUAL
+	</select>
+</mapper>

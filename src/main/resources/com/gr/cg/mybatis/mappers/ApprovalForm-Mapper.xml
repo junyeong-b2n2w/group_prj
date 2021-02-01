@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="ApprovalForm-Mapper">
+
+	<sql id="search">
+		<if test="keyword != null and !keyword.equals('')">
+			and af_nm like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+	
+	<select id="selectApprovalFormListByCRI" resultType="ApprovalForm">
+		
+		select * from APPROVALFORM, FORMFAVORITES
+		where AF_COMPNO = #{comp_no}
+		<include refid="search" />
+		AND AF_NO = FF_NO(+)
+		order by FF_EMPID NULLS last, AF_NO DESC
+		
+	</select>
+	
+	
+	
+	
+	<select id="selectApprovalFromByAFNO" resultType="ApprovalForm">
+		
+		select * from APPROVALFORM
+		where af_no = #{af_no}
+		
+	</select>	
+	
+	
+	
+	<select id="selectApprovalFormListByCRITotalCount" resultType="int">
+		
+	select count(*) from APPROVALFORM
+		where AF_COMPNO = #{comp_no}
+		<include refid="search" />
+		order by AF_NO
+		
+		
+	</select>	
+	
+		
+	<select id="selectApprovalFromNextSeq" resultType="int">
+		
+		select ApprovalForm_seq.nextval from dual
+		
+	</select>
+	
+	<update id="deleteApprovalFormByAFNO">
+		
+		delete from APPROVALFORM
+		where AF_NO =#{af_no}
+		 
+	</update>
+
+	<update id="insertApprovalForm" >
+		
+		insert into APPROVALFORM 
+		values (ApprovalForm_seq.nextval,#{af_compno},#{af_nm},#{af_cont})
+		
+
+	</update>
+
+	<update id="updateApprovalFormByAFNO">
+		
+		update APPROVALFORM set
+		AF_NM=#{af_nm},
+		AF_CONT=#{af_cont}
+		where AF_NO= #{af_no}
+	</update>
+	
+	<update id="insertFormFavorite" parameterType="formfav">
+		INSERT INTO formfavorites VALUES(#{ff_empid}, #{ff_no})
+	</update>
+	<update id="deleteFormFavorite" parameterType="int">
+		DELETE FROM formfavorites WHERE ff_no = #{ff_no}
+	</update>
+</mapper>

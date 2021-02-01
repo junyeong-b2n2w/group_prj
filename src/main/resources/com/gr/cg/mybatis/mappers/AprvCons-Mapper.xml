@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AprvCons-Mapper">
+	<update id="insertAprv" parameterType="aprv">
+		INSERT INTO APPROVAL(APRV_NO, APRV_EDNO, APRV_ORD, APRV_PRINTYN, APRV_AS, APRV_EMPID) 
+		VALUES(approval_seq.nextval, #{aprv_edno}, #{aprv_ord}, 'Y', #{aprv_as}, #{aprv_empid})
+	</update>
+	<update id="insertCons" parameterType="cons">
+		INSERT INTO CONSENSUS(CONS_NO, CONS_EMPID, CONS_ORD, CONS_PRINTYN, CONS_AGRESTT, CONS_EDNO) 
+		VALUES(consensus_seq.nextval, #{cons_empid}, #{cons_ord}, 'Y', #{cons_agrestt}, #{cons_edno})
+	</update>
+	<update id="insertFirstCons" parameterType="cons">
+		INSERT INTO CONSENSUS(CONS_NO, CONS_EMPID, CONS_ORD, CONS_PRINTYN, CONS_AGRESTT, CONS_EDNO, CONS_ASGMDT) 
+		VALUES(consensus_seq.nextval, #{cons_empid}, #{cons_ord}, 'Y', #{cons_agrestt}, #{cons_edno}, sysdate)
+	</update>
+	<update id="insertFirstAprv" parameterType="aprv">
+		INSERT INTO APPROVAL(APRV_NO, APRV_EDNO, APRV_ORD, APRV_PRINTYN, APRV_AS, APRV_EMPID, APRV_ASGMDT) 
+		VALUES(approval_seq.nextval, #{aprv_edno}, #{aprv_ord}, 'Y', #{aprv_as}, #{aprv_empid}, sysdate)
+	</update>
+	
+	
+	<select id="selectEdocForAprv" resultType="elecDocument" parameterType="int">
+		SELECT * FROM ELECTRONICDOCUMENT WHERE ED_NO = #{edno}
+	</select>
+	<select id="selectAprvForAprv" parameterType="int" resultType="aprv">
+		SELECT * FROM APPROVAL WHERE APRV_NO = #{aprvno}
+	</select>
+	<select id="selectConsForAprv" parameterType="int" resultType="cons">
+		SELECT * FROM CONSENSUS WHERE CONS_NO = #{consno}
+	</select>
+	<update id="updateAprv" parameterType="aprv">
+		UPDATE APPROVAL SET APRV_COMM = #{aprv_comm,jdbcType=VARCHAR}, APRV_AS = #{aprv_as}, APRV_ATTCKEY=#{aprv_attckey,jdbcType=VARCHAR}, APRV_DT = sysdate WHERE APRV_NO = #{aprv_no}
+	</update>
+	<update id="updateCons" parameterType="cons">
+		UPDATE CONSENSUS SET CONS_COMM = #{cons_comm,jdbcType=VARCHAR}, CONS_AGRESTT = #{cons_agrestt}, CONS_AGREDT = sysdate WHERE CONS_NO = #{cons_no}
+	</update>
+	<select id="selectNextAprvList" resultType="aprv" parameterType="map">
+		SELECT *
+		FROM
+			(SELECT aprv_no,aprv_edno,aprv_asgmdt,aprv_idntydt,aprv_dt,aprv_ord,aprv_printyn,aprv_empid,aprv_as,aprv_attckey,aprv_comm
+			FROM APPROVAL UNION 
+			SELECT CONS_NO,CONS_EDNO,CONS_ASGMDT,CONS_IDNTYDT,CONS_AGREDT,CONS_ORD,CONS_PRINTYN,CONS_EMPID,CONS_AGRESTT, '-',CONS_COMM
+			FROM CONSENSUS)
+		WHERE APRV_EDNO = #{edno} AND APRV_ORD > ${ord}
+		ORDER BY APRV_ORD
+	</select>
+	<update id="updateEdocFinal" parameterType="int">
+		UPDATE ELECTRONICDOCUMENT SET ED_APRVSTT = 'DED04', ED_COMYMD = sysdate WHERE ED_NO = #{ed_no}
+	</update>
+	<select id="selectEdocTaskNo" parameterType="int" resultType="str">
+		SELECT ED_TASKNO FROM ELECTRONICDOCUMENT WHERE ED_NO = #{edno}
+	</select>
+	<update id="updateParallelCons" parameterType="map">
+		UPDATE CONSENSUS SET CONS_AGRESTT = #{code}, CONS_ASGMDT = sysdate WHERE CONS_NO = #{consno}
+	</update>
+	<update id="updateTurnCons" parameterType="map">
+		UPDATE CONSENSUS SET CONS_AGRESTT = #{code}, CONS_ASGMDT = sysdate WHERE CONS_NO = #{consno}
+	</update>
+	<update id="updateAprvStt" parameterType="aprv">
+		UPDATE APPROVAL SET APRV_AS = #{aprv_as}, APRV_ASGMDT = sysdate WHERE APRV_NO = #{aprv_no}
+	</update>
+	<update id="updateEdocToReturn" parameterType="int">
+		UPDATE ELECTRONICDOCUMENT SET ED_APRVSTT = 'DED05',ED_COMYMD = sysdate WHERE ED_NO = #{ed_no}
+	</update>
+	<update id="updateEdocToIng" parameterType="int">
+		UPDATE ELECTRONICDOCUMENT SET ED_APRVSTT = 'DED03' WHERE ED_NO = #{ed_no}
+	</update>
+	<select id="selectParConsCnt" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM CONSENSUS WHERE CONS_EDNO = #{edno} AND CONS_AGRESTT = 'DAP25' OR CONS_AGRESTT = 'DAP65'
+	</select>
+	<update id="insertFinalAprvPdf" parameterType="map">
+		INSERT INTO APPROVALTASKATTACHMENTS VALUES(#{edno}, #{path})
+	</update>
+	<select id="selectFinAprvPdf" resultType="str">
+		SELECT ATA_PATH FROM APPROVALTASKATTACHMENTS WHERE ATA_EDNO = #{edno}
+	</select>
+</mapper>

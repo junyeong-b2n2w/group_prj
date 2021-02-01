@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Task-Mapper">
+
+
+<select id="selectFileList" resultType="attach" parameterType="int">
+			SELECT C.*
+			FROM task A, ATTACHMENTS C
+			WHERE A.TASK_ATTCKEY = C.ATTC_KEY
+	        AND A.tasc_no = #{tasc_no} AND ATTC_DELETYN = 'N'
+	
+	</select>
+	
+	<select id="selectAkNoListByKey" parameterType="str">
+		SELECT * FROM ATTACHMENT WHERE ATTC_KEY =#{ak}
+	</select>
+	
+<update id="deleteTask" parameterType="int">
+	update task
+	set task_delyn = 'Y'
+	where tasc_no=#{tasc_no}
+
+</update>	
+
+
+<update id="insertTask" parameterType="task">
+	insert into task
+				(TASC_NO,
+				TASK_TITLE,
+				TASK_CONT,
+				TASK_DDLNDT,
+				TASK_SHAPE,
+				TASK_IMPT,
+				TASK_EMPID,
+				TASK_ATTCKEY
+				)
+			values(
+					#{tasc_no},#{task_title},#{task_cont},#{task_ddlndt},#{task_shape},#{task_impt},#{task_empid},#{task_attckey,jdbcType=VARCHAR}
+					)
+</update>
+
+<update id="modifyTask" parameterType="task">
+	update task 
+	set TASK_TITLE = #{task_title}, TASK_CONT = #{task_cont}, TASK_DDLNDT=#{task_ddlndt}, TASK_SHAPE = #{task_shape}, TASK_IMPT =#{task_impt}
+					 , TASK_ATTCKEY = #{task_attckey,jdbcType=VARCHAR} 
+	where tasc_no = #{tasc_no} 
+</update>
+
+<update id="BusinessApprovalTask" parameterType="task">
+	update task
+	set task_stt ='진행'
+	where tasc_no = #{tasc_no}
+</update>
+
+<update id="BusinessApprovalTaskBack" parameterType="task">
+	update task
+    set task_stt = '반려'
+    where tasc_no = #{tasc_no} 
+</update>
+
+
+<select id="selectTaskByTaskNo" parameterType="int" resultType="task">
+	 select *
+	 from task
+	 where tasc_no = #{tasc_no}
+</select>
+
+<select id="selectTaskRecevie" parameterType="int" resultType="performer">
+	 select *
+	 from performer
+	 where perf_tascno = #{perf_tascno}
+</select>
+
+
+<select id="selectTaskReciveByTaskList" parameterType="int" resultType="task">
+	  select *
+	  from task,performer,EMPLOYEE,RANK
+	  where task.tasc_no = performer.PERF_TASCNO and performer.PERF_EMPID= EMPLOYEE.EMP_ID and RANK.RANK_NO = EMPLOYEE.EMP_RANKNO
+      and task_delyn = 'N'
+      and tasc_no = #{tasc_no}
+</select>
+
+<!-- 지시자(업무 발신자) 뽑기 -->
+<select id="selectTaskNoOne" parameterType="task" resultType="task">
+	  					select *
+						from task,employee,rank,performer
+						where task.tasc_no = performer.perf_tascno and task.task_empid = employee.emp_id and employee.emp_rankno = rank.rank_no
+                        and task_delyn = 'N'
+                        and performer.perf_empid = #{perf_empid}
+                        and task.tasc_no = #{tasc_no}
+                        order by perf_tascno desc
+</select>
+
+<!-- 담당자(수신자) 목록 리스트 뽑아오기 -->
+<select id="selectTaskReciveByTaskNo" parameterType="int" resultType="task">
+	  select *
+	  from task,performer,EMPLOYEE,RANK
+	  where task.tasc_no = performer.PERF_TASCNO and performer.PERF_EMPID= EMPLOYEE.EMP_ID and RANK.RANK_NO = EMPLOYEE.EMP_RANKNO
+      and task_delyn = 'N'
+      and tasc_no = #{tasc_no}
+</select>
+
+
+<!-- 담당자(수신자) 한명 뽑아오기 -->
+<select id="selectReceiverGetOne" parameterType="task" resultType="task">
+	      select *
+	  from task,performer,EMPLOYEE,RANK
+	  where task.tasc_no = performer.PERF_TASCNO and performer.PERF_EMPID= EMPLOYEE.EMP_ID and RANK.RANK_NO = EMPLOYEE.EMP_RANKNO
+      and task_delyn = 'N'
+      and perf_tascno = #{perf_tascno}
+      and perf_empid =#{perf_empid}
+</select>
+
+<!-- 지우기 (쓸모 x) -->
+<select id="selectworkreturnList" resultType="task">
+ SELECT * 
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum 
+		        FROM(	select *
+						from task,performer,EMPLOYEE,RANK
+						where task.tasc_no = performer.PERF_TASCNO and performer.PERF_EMPID= EMPLOYEE.EMP_ID and RANK.RANK_NO = EMPLOYEE.EMP_RANKNO
+                        and task_delyn = 'N'
+                        and performer.PERF_EMPID = #{searchno}
+                        and task_stt= '반려'
+                             
+					) A 
+		        WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>) 
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end} 
+</select>
+
+
+<select id="selectTaskList" resultType="task">
+ SELECT * 
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum 
+		        FROM(	
+
+						SELECT task.*, (SELECT COUNT(*) FROM PERFORMER WHERE PERF_TASCNO = TASC_NO) count,
+						(SELECT EMP_NM FROM EMPLOYEE WHERE EMP_ID = (SELECT MAX(PERF_EMPID) PERF_EMPID FROM PERFORMER WHERE PERF_TASCNO = TASC_NO)) empnm,
+						(SELECT rank_nm FROM RANK where rank_no = (SELECT emp_rankno FROM EMPLOYEE WHERE EMP_ID = (SELECT MAX(PERF_EMPID) PERF_EMPID FROM PERFORMER WHERE PERF_TASCNO = TASC_NO))) emprank 
+						FROM TASK
+						where task_empid= #{searchno} and task_delyn='N'
+						and task_shape= '업무 요청'
+                        order by tasc_no desc
+                             
+					) A 
+		        WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>) 
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end} 
+</select>
+
+
+<select id="NmgReceiverList" resultType="task" parameterType="int">
+      select task.tasc_no,EMPLOYEE.emp_nm, RANK.rank_nm,performer.PERF_STT,performer.PERF_PROGRESS,performer.perf_tascno,perf_empid
+	  from task,performer,EMPLOYEE,RANK
+	  where task.tasc_no = performer.PERF_TASCNO and performer.PERF_EMPID= EMPLOYEE.EMP_ID and RANK.RANK_NO = EMPLOYEE.EMP_RANKNO
+      and task_delyn = 'N'
+      and task_shape= '업무 요청'
+      and tasc_no = #{tasc_no}
+      order by tasc_no desc
+      
+
+</select> 
+
+
+<select id="selectWidgetNum" resultType="task" parameterType="str">
+						select *
+                        from(
+                        select *
+						from task,employee,rank,performer
+						where task.tasc_no = performer.perf_tascno and task.task_empid = employee.emp_id and employee.emp_rankno = rank.rank_no
+                        and task_delyn = 'N'
+                        and performer.perf_empid = #{perf_empid}
+                        and task.task_stt in('진행','대기')
+                        and perf_stt in('진행','대기')
+                        order by perf_tascno desc 
+                        )
+                        where rownum &lt;= 4
+</select>
+
+
+
+
+<select id="selectTaskReceiveList" resultType="task" parameterType="str">
+	SELECT * 
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum 
+		        FROM(	
+		        		select *
+						from task,employee,rank,performer
+						where task.tasc_no = performer.perf_tascno and task.task_empid = employee.emp_id and employee.emp_rankno = rank.rank_no
+                        and task_delyn = 'N'
+                        and performer.perf_empid = #{searchno}
+                        and task.task_stt in('진행','대기')
+                        order by perf_tascno desc
+                        
+                        
+					) A 
+		        WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>) 
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end} 
+
+</select>
+
+<select id="selectTaskSequenceNextValue" resultType="int">
+		select task_seq.nextVal
+		from dual
+</select>
+
+</mapper>

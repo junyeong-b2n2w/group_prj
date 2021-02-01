@@ -1,0 +1,216 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Bdoc-Mapper">
+	
+	<sql id="share">
+		<if test="shareType == 'P'.toString()">
+			and bd_empid = #{empid}
+			and bd_shareyn = 'P'			
+		</if>
+		<if test="shareType == 'T'.toString()">
+			and bd_deptno = #{deptno}
+			and bd_shareyn = 'T'			
+		</if>
+		<if test="shareType == 'C'.toString()">
+			and bd_cmpno = #{cmpno}
+			and bd_shareyn = 'C'			
+		</if>
+	</sql>
+	
+	<sql id="first">
+		<if test="isFirst == 'Y'.toString()">
+			and bd_upfd = 0
+		</if> 
+		<if test="isFirst == 'N'.toString()">
+			and bd_upfd = #{upfd}
+		</if>
+	</sql>
+	
+	<select id="selectFileList" resultType="com.gr.cg.dto.BusinessDocumentVO" >
+		SELECT distinct D.*,A.ATTC_EXTNM,A.ATTC_NO, a.attc_extn, d.bd_upfd bd_upfd, d.bd_shareyn bd_shareyn, d.bd_empid bd_empid, d.bd_deptno bd_deptno, d.bd_cmpno bd_cmpno, NVL((select bd_upfd from BUSINESSDOCUMENT where bd_no = #{upfd}),0) upfolder
+		FROM BUSINESSDOCUMENT D, (
+		        SELECT C.ATTC_EXTNM, C.ATTC_NO, C.attc_extn, A.AK
+		            FROM ATTACHMENTS C,
+		                (SELECT B.BD_ATTCKEY, A.AK
+		                FROM BUSINESSDOCUMENT B , ATTACHMENTSKEY A
+		                WHERE B.BD_ATTCKEY = A.AK) A
+		        WHERE C.ATTC_key = A.AK)A
+		WHERE D.BD_ATTCKEY = A.AK(+)
+		and d.bd_useyn = 'Y'
+		and (bd_nm is not null or attc_extnm is not null)
+		and bd_upfd = #{upfd}
+		<include refid="share"></include>
+		order by attc_extnm nulls first, bd_no
+	</select>
+	
+	<update id="insertBDoc" parameterType="com.gr.cg.dto.BusinessDocumentVO">
+		INSERT INTO businessdocument (
+		    bd_no,
+		    bd_empid,
+		    bd_useyn,
+		    bd_fileyn,
+		    bd_shareyn,
+		    bd_upfd,
+		    bd_attckey,
+		    bd_regdt,
+		    bd_udtid,
+		    bd_udtdt,
+		    bd_cmpno,
+		    bd_deptno,
+		    bd_nm
+		) VALUES (
+		    bdoc_seq.nextVal,
+		    #{bd_empid},
+		    #{bd_useyn},
+		    #{bd_fileyn},
+		    #{bd_shareyn},
+		    #{bd_upfd},
+		    #{bd_attckey},
+		    sysdate,
+		    #{bd_udtid},
+		    sysdate,
+		    #{bd_cmpno},
+		    #{bd_deptno},
+		    #{bd_nm,jdbcType=VARCHAR}
+		)
+	</update>
+	
+	
+	<select id="selectBdocSequenceNextValue" resultType="int">
+		SELECT bdoc_seq.nextVal
+		FROM dual
+	</select>
+	
+	
+	<update id="deleteBdoc">
+		UPDATE businessdocument
+			SET bd_useyn = 'N'
+			WHERE bd_no = #{bd_no}
+	</update>
+	
+	<select id="selectOneByAttcNo" parameterType="int" resultType="com.gr.cg.dto.BusinessDocumentVO">
+		SELECT a.*
+		FROM businessdocument a, attachments b
+		WHERE a.bd_attckey = b.attc_key
+		AND b.attc_no = #{attc_no}
+	</select>
+	
+	<select id="selectAttNoByBdNo" resultType="int">
+		SELECT b.attc_no
+		FROM businessdocument a, attachments b
+		WHERE a.bd_attckey = b.attc_key
+		AND a.bd_no= #{bd_no}
+	</select>
+	
+	<select id="selectFolderList" resultType="com.gr.cg.dto.BusinessDocumentVO">
+		SELECT
+		    *
+		FROM
+		    businessdocument
+		WHERE bd_fileyn = 'N'
+		and bd_useyn = 'Y'
+		<include refid="share"></include>
+	</select>
+	
+	<sql id="isFile">
+		<if test="bd_fileyn == 'N'.toString()">
+			bd_nm = #{bd_nm},
+		</if>
+	</sql>
+	
+	<update id="updateFolder" parameterType="com.gr.cg.dto.BusinessDocumentVO">
+		UPDATE businessdocument
+		    SET
+		        <include refid="isFile"></include>
+		        bd_udtid = #{bd_udtid},
+		        bd_udtdt = sysdate
+			WHERE
+		    bd_no = #{bd_no}
+	</update>
+	
+	
+	<select id="selectBdocByBdNo" parameterType="int" resultType="com.gr.cg.dto.BusinessDocumentVO">
+		SELECT bd_no, bd_empid, bd_useyn, bd_fileyn, bd_shareyn, bd_upfd, bd_attckey, bd_regdt, bd_udtid, bd_udtdt, bd_cmpno, bd_deptno, bd_nm
+		FROM businessdocument
+		where bd_no = #{bd_no}
+	</select>
+	
+	<select id="selectUpfd" resultType="int">
+		select bd_upfd 
+		from BUSINESSDOCUMENT 
+		where bd_no = #{upfd}
+	</select>
+	
+	<update id="updateExtnm" parameterType="java.util.HashMap">
+		UPDATE attachments
+	    SET attc_extnm = #{extnm}
+		WHERE attc_no = #{attc_no}
+	</update>
+	
+	<update id="moveItem" parameterType="com.gr.cg.dto.BusinessDocumentVO">
+		UPDATE businessdocument
+		SET bd_upfd = #{bd_upfd}
+		WHERE bd_no = #{bd_no}
+	</update>
+	
+	
+	<resultMap type="HashMap" id="itemMap">
+
+		<id column="bd_no" property="bd_no" />
+		<id column="bd_empid" property="bd_empid" />
+		<id column="bd_fileyn" property="bd_fileyn" />
+		<id column="bd_upfd" property="bd_upfd" />
+		<id column="bd_nm" property="bd_nm" />
+		<id column="bd_attckey" property="bd_attckey" />
+		<id column="attc_no" property="attc_no" />
+		<id column="attc_key" property="attc_key" />
+		<id column="attc_nm" property="attc_nm" />
+		<id column="attc_extnm" property="attc_extnm" />
+		<id column="attc_route" property="attc_route" />
+		<id column="attc_sz" property="attc_sz" />
+	</resultMap>
+
+
+
+	<select id="folderDownloadList" resultMap="itemMap">
+		SELECT LPAD(' ',(LEVEL-1) * 4 ) || bd_no, D.*,A.*
+		FROM BUSINESSDOCUMENT D, (
+		        SELECT C.* ,A.AK
+		            FROM ATTACHMENTS C,
+		                (SELECT B.BD_ATTCKEY, A.AK
+		                FROM BUSINESSDOCUMENT B , ATTACHMENTSKEY A
+		                WHERE B.BD_ATTCKEY = A.AK) A
+		        WHERE C.ATTC_key = A.AK)A
+		WHERE D.BD_ATTCKEY = A.AK(+)
+		and d.bd_useyn = 'Y'
+		and (bd_nm is not null or attc_extnm is not null)
+		<include refid="share"></include>
+		START WITH bd_no = #{bd_no}
+		CONNECT BY PRIOR bd_no = bd_upfd
+	</select>
+	
+	<select id="downloadAll" resultMap="itemMap">
+		SELECT LPAD(' ',(LEVEL-1) * 4 ) || bd_no, D.*,A.*
+		FROM BUSINESSDOCUMENT D, (
+		        SELECT C.* ,A.AK
+		            FROM ATTACHMENTS C,
+		                (SELECT B.BD_ATTCKEY, A.AK
+		                FROM BUSINESSDOCUMENT B , ATTACHMENTSKEY A
+		                WHERE B.BD_ATTCKEY = A.AK) A
+		        WHERE C.ATTC_key = A.AK)A
+		WHERE D.BD_ATTCKEY = A.AK(+)
+		and d.bd_useyn = 'Y'
+		and (bd_nm is not null or attc_extnm is not null)
+		<include refid="share"></include>
+		START WITH bd_upfd = #{bd_upfd}
+		CONNECT BY PRIOR bd_no = bd_upfd
+	</select>
+	
+	<select id="selectupList" parameterType="int" resultType="com.gr.cg.dto.BusinessDocumentVO">
+		select * 
+		from BUSINESSDOCUMENT 
+        start with bd_no = #{bd_no}
+        connect by prior bd_no = bd_upfd
+	</select>
+	
+</mapper>

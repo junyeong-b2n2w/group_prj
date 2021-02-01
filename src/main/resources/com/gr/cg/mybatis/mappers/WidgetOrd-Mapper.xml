@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="WidgetOrd-Mapper">
+
+	<update id="insertWidget" parameterType="widgetord">
+		insert into 
+		widgetorder( WO_WGNO,	
+					 WO_EMPID,	
+					 WO_ORD,
+					 WO_ACTVYN	
+					  )
+		values(#{wo_wgno},#{wo_empid},#{wo_ord},'Y'
+		)
+		
+	</update>
+	
+	<select id="selectListOrd" resultType="widgetord" parameterType="str">
+		select *
+		from widgetorder a,widget b
+		where a.WO_WGNO = b.WG_NO
+        and wo_empid = #{wo_empid} and wo_actvyn = 'Y' 
+        order by wo_ord 
+	</select>
+	
+	<select id="selectWidgetYN" resultType="widgetord" parameterType="str">
+		select *
+		from widgetorder a,widget b
+		where a.WO_WGNO = b.WG_NO
+        and wo_empid = #{wo_empid} 
+        order by wo_ord 
+	</select>
+	
+	<update id="widgetdelYN" parameterType="widgetord">
+		update widgetorder
+		set wo_actvyn = #{wo_actvyn}
+		where wo_wgno = #{wo_wgno} and wo_empid = #{wo_empid}
+	</update>
+	
+	<update id="updateWidget" parameterType="widgetord">
+		update
+		widgetorder
+		<if test='Num == "pulse".toString()'>
+		set wo_ord = wo_ord +1 
+		</if>
+		<if test='Num == "minus".toString()'>
+		set wo_ord = wo_ord -1 
+		</if>			
+		where wo_ord = #{wo_ord}  and wo_empid = #{wo_empid}
+	</update>
+	
+	<update id="updateWidgetOne" parameterType="widgetord">
+		update widgetorder
+		set wo_ord = #{wo_ord}
+		where wo_empid = #{wo_empid} and wo_wgno=#{wo_wgno}
+	
+	</update>
+	
+
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="c.c.c.mapper.NoticeMapper">
+	
+
+
+<!--     <select id="selectNow" resultType="c.c.c.dto.NoticeVO"> -->
+<!--         SELECT * -->
+<!-- 		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum -->
+<!-- 		        FROM(SELECT * FROM ${table} ORDER BY ${orderby} ${asc}) A -->
+<!-- 		        WHERE ${primarykey} IS NOT NULL <include refid="include.search"/>) -->
+<!-- 		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end} -->
+<!--     </select> -->
+</mapper>

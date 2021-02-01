@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="include">
+ 	
+ 	<sql id="search2">
+		<if test="@com.gr.cg.command.MapperNullCheck@isNotEmpty(likeMap)">
+			<foreach collection="likeMap" item="value" index="key">
+				AND ${key} LIKE '%'||#{value}||'%'
+			</foreach>
+	  	</if>
+		<if test="@com.gr.cg.command.MapperNullCheck@isNotEmpty(equalMap)">
+			<foreach collection="equalMap" item="value" index="key">
+				AND ${key} = #{value}
+			</foreach>
+	  	</if>
+		<if test="@com.gr.cg.command.MapperNullCheck@isNotEmpty(inMap)">
+			<foreach collection="inMap" item="value" index="key">
+				AND ${key} IN 
+				<foreach collection="value" item="item" index="idx" separator="," open="(" close=")">
+					#{item}
+				</foreach>
+			</foreach>
+	  	</if>
+		<if test="@com.gr.cg.command.MapperNullCheck@isNotEmpty(notInMap)">
+			<foreach collection="notInMap" item="value" index="key">
+				AND ${key} NOT IN 
+				<foreach collection="value" item="item" index="idx" separator="," open="(" close=")">
+					#{item}
+				</foreach>
+			</foreach>
+	  	</if>
+		<if test="@com.gr.cg.command.MapperNullCheck@isNotEmpty(dateGtMap)">
+			<foreach collection="dateGtMap" item="value" index="key">
+				AND ${key} &gt;= TO_DATE('${value}','yyyy-mm-dd')
+			</foreach>
+	  	</if>
+		<if test="@com.gr.cg.command.MapperNullCheck@isNotEmpty(dateLtMap)">
+			<foreach collection="dateLtMap" item="value" index="key">
+				AND ${key} &lt; TO_DATE('${value}','yyyy-mm-dd')+1
+			</foreach>
+	  	</if>
+ 	</sql>
+</mapper>

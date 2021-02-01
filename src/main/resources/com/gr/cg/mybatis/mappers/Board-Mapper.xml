@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Board-Mapper">
+	<update id="insertBoard" parameterType="board">
+		insert into 
+		board(BOARD_NO,
+			  BOARD_ACTVYN,
+			  BOARD_CRT,
+			  BOARD_NM,
+			  BOARD_PBOARDNO,
+			  BOARD_COMPNO
+			  )
+		 values(#{board_no},#{board_actvyn},#{board_crt},
+				#{board_nm} , #{board_pboardno}, #{board_compno})
+	</update>
+	
+	<update id="ModifyBoard" parameterType="board">
+		update board
+		set board_actvyn = #{board_actvyn}, board_nm = #{board_nm},
+			board_pboardno = #{board_pboardno}
+		where board_no = #{board_no} and board_compno = #{board_compno}
+	</update>
+	
+	
+	<update id="BoardDelete" parameterType="board">
+		update board
+		set board_actvyn = 'N'
+		where board_no = #{board_no} and board_compno = #{board_compno}
+	</update>
+	
+	<select id="selectBoardSequenceNextValue" resultType="int">
+		select board_seq.nextVal
+		from dual
+	</select>
+	
+	<select id="selectBoardList" resultType="board" parameterType="int">
+		select *
+		from board
+		where board_actvyn='Y' and board_compno = #{board_compno}
+	</select>
+	
+	<select id="selectBoardAllList" resultType="board" parameterType="board">
+		select *
+		from board
+		where board_actvyn='N' and board_compno = #{board_compno}
+	</select>
+	
+	
+	
+</mapper>

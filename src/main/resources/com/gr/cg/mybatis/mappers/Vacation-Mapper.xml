@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Vacation-Mapper">
+	
+		<sql id="search">
+			<if test="searchType == 'd'.toString()">
+				and VACT_DEPTNM like '%'||#{keyword}||'%'			
+			</if>
+			<if test="searchType == 'e'.toString()">
+				and VACT_NM like '%'||#{keyword}||'%'			
+			</if>
+			<if test="searchType == 'de'.toString()">
+				and (
+					VACT_DEPTNM like '%'||#{keyword}||'%'
+					or
+					VACT_NM like '%'||#{keyword}||'%'						
+					)			
+			</if>
+		</sql>
+	
+	<update id="updateMyVcatByVactId" parameterType="vacation">
+	
+					UPDATE  VACATION  SET 
+					    
+						    VACT_SATYMD = #{vact_satymd},
+						    VACT_ENDYMD = #{vact_endymd},
+						    VACT_GB = #{vact_gb},
+						    VACT_REASON = #{vact_reason},
+						    VACT_DAYS = #{vact_days},
+						  	VACT_APLUDTYMD = SYSDATE
+					WHERE VACT_NO = #{vact_no}
+	</update>
+	<update id="insertVcatById" parameterType="vacation">
+		INSERT INTO VACATION (
+					    VACT_NO,VACT_ID,
+					    VACT_SATYMD,VACT_ENDYMD,
+					    VACT_GB,VACT_REASON,
+					    VACT_CRIY,VACT_DAYS,
+					    VACT_APRVYN,VACT_DELYN,
+					    VACT_COMPNO,VACT_APLYMD,
+					    VACT_EDNO
+					) VALUES (
+					    #{vact_no},#{vact_id},
+					    #{vact_satymd},#{vact_endymd},
+					    #{vact_gb},#{vact_reason,jdbcType=VARCHAR},
+					    #{vact_criy},#{vact_days},
+					   'N',  'N',
+					    #{vact_compno},SYSDATE,#{vact_edno}
+					)
+	</update>
+	<select id="selectVacationSeq" resultType="int">
+		SELECT VACATION_SEQ.NEXTVAL FROM DUAL
+	</select>
+	
+	<!-- 관리자 회사별 전체 휴가 내역 가져오기 -->
+	<select id="selectVcatAllList" resultType="vacation">
+	
+				
+		
+		SELECT * FROM (
+			SELECT A.*, B.DEPT_NM VACT_DEPTNM
+			FROM DEPARTMENT B,(SELECT V.*,E.EMP_NM VACT_NM,E.EMP_DEPTNO DEPT_NO FROM VACATION V , EMPLOYEE E WHERE E.EMP_ID = V.VACT_ID) A
+			WHERE B.DEPT_NO = A.DEPT_NO
+			)
+		WHERE VACT_COMPNO  = #{comp_no} <include refid="search"/>
+	
+	
+	</select>
+	
+	<!-- 입사일자 기준으로 근속년도 별 연차발생개수 가져오기 -->
+	<select id="selectAnnualCntByCompno" resultType="vacation" parameterType="str">
+	<![CDATA[
+	
+							SELECT
+								 A.EMP_ID VACT_ID,
+								 A.EMP_COMPNO VACT_COMPNO, 
+								 A.VACCNT VACT_OCCURCNT, 
+								 NVL(B.USECNT,0) VACT_USECNT,
+								 NVL((A.VACCNT - B.USECNT),0) VACT_REMCNT
+							FROM
+								(SELECT A.*,
+									(CASE WHEN A.WORKYEAR = 0 THEN A.WORKMONTH
+									        WHEN (A.WORKYEAR > 0 AND A.WORKYEAR <= 2) THEN 15
+									         WHEN (A.WORKYEAR > 2 AND A.WORKYEAR <= 4) THEN 16
+									          WHEN (A.WORKYEAR > 4 AND A.WORKYEAR <= 6) THEN 17
+									           WHEN (A.WORKYEAR > 6 AND A.WORKYEAR <= 8) THEN 18
+									            WHEN (A.WORKYEAR > 8 AND A.WORKYEAR <= 10) THEN 19
+									        ELSE 25
+									    END) AS VACCNT
+								FROM
+									(SELECT EMP_ID,EMP_NM, EMP_JNCMPYMD,EMP_COMPNO,
+										TRUNC ( ( MONTHS_BETWEEN ( SYSDATE, EMP_JNCMPYMD ) ) / 12 ) WORKYEAR, 
+										TRUNC ( MOD( MONTHS_BETWEEN( SYSDATE, EMP_JNCMPYMD ), 12 ) ) WORKMONTH
+										FROM EMPLOYEE) A) A,
+										
+									(   SELECT EMP_ID,SUM(VACT_DAYS) USECNT
+									    FROM VACATION , EMPLOYEE
+									    WHERE EMP_ID = VACT_ID AND (VACT_GB ='연차' OR VACT_GB = '반차') AND VACT_CRIY = TO_CHAR(SYSDATE,'YYYY') AND VACT_APRVYN ='Y'
+									    GROUP BY EMP_ID )B
+									    
+								WHERE A.EMP_ID = B.EMP_ID(+) AND A.EMP_id = #{vact_id}
+	]]>
+	</select>
+	
+	<!-- 휴가 승인  사용 연차 개수 +해주기 /잔여 연차 -해주기 -->
+	<update id="updateVactConfirm" parameterType="vacation">
+		UPDATE VACATION 
+		SET 
+			VACT_APRVYN = #{vact_aprvyn}, VACT_REGDT = SYSDATE, VACT_DELYN = #{vact_delyn} 
+		WHERE VACT_NO =#{vact_no}
+	</update>
+	
+	<select id="selectVcatAllListCnt" resultType="int">
+	
+			
+		SELECT COUNT(*) FROM (
+			SELECT A.*, B.DEPT_NM VACT_DEPTNM
+			FROM DEPARTMENT B,(SELECT V.*,E.EMP_NM VACT_NM,E.EMP_DEPTNO DEPT_NO FROM VACATION V , EMPLOYEE E WHERE E.EMP_ID = V.VACT_ID) A
+			WHERE B.DEPT_NO = A.DEPT_NO
+			)
+		WHERE VACT_COMPNO  = #{comp_no} <include refid="search"/>
+		
+	</select>
+	
+	
+	<select id="selectVcatByVactId" resultType="vacation" parameterType="vacation">
+	
+		SELECT *
+			FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+			        FROM(
+								SELECT A.*, B.DEPT_NM VACT_DEPTNM
+								FROM DEPARTMENT B,(SELECT V.*,E.EMP_NM VACT_NM,E.EMP_DEPTNO DEPT_NO FROM VACATION V , EMPLOYEE E WHERE E.EMP_ID = V.VACT_ID) A
+								WHERE B.DEPT_NO = A.DEPT_NO AND VACT_ID = #{searchno}
+								ORDER BY ${orderby} ${asc}
+			)A  
+			WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>)
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+
+	</select>
+	
+	<!-- 오늘 날짜부터 한달 이후의 휴가 중인 사원들의 수를 뽑아낸다 -->
+	<select id="selectVactIngEmpCount" resultType="java.util.Map" parameterType="int">
+		<![CDATA[
+			SELECT b.dt TOTALDT, NVL(a.cnt, 0) EMPCNT
+			FROM
+			(SELECT dt, COUNT(*) cnt
+			FROM
+			(SELECT vact_id, TO_CHAR(vact_satymd, 'YYYYMMDD') ST, TO_CHAR(vact_endymd, 'YYYYMMDD') ED
+			 FROM vacation a) a,
+			
+			(SELECT TO_CHAR(TO_DATE(TO_CHAR(SYSDATE,'YYYYMM') || '01', 'YYYYMMDD') + (LEVEL-1), 'YYYYMMDD') DT
+			 FROM dual
+			 CONNECT BY LEVEL < TO_CHAR(LAST_DAY(TO_DATE(TO_CHAR(SYSDATE,'YYYYMM'), 'YYYYMM')), 'DD')) b
+			WHERE b.dt BETWEEN a.st AND a.ed
+			GROUP BY dt ) a,
+			(SELECT TO_CHAR(TO_DATE(TO_CHAR(SYSDATE,'YYYYMM') || '01', 'YYYYMMDD') + (LEVEL-1), 'YYYYMMDD') DT
+			 FROM dual
+			 CONNECT BY LEVEL < TO_CHAR(LAST_DAY(TO_DATE(TO_CHAR(SYSDATE,'YYYYMM'), 'YYYYMM')), 'DD')) b
+			WHERE a.dt(+) = b.dt
+			ORDER BY b.dt
+		]]>
+	</select>
+	
+	<select id="selectVactAprvByDeptNo" resultType="java.util.Map">
+		SELECT DEPT_NO,COUNT(VACT_NO) APRVCNT FROM
+			(SELECT V.* ,A.* ,(SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = A.EMP_DEPTNO)DEPT_NO FROM VACATION V, EMPLOYEE A WHERE V.VACT_ID = A.EMP_ID AND  VACT_APRVYN = 'N' AND VACT_DELYN = 'N')
+		GROUP BY DEPT_NO
+	</select>
+	<select id="selectVactAprvByRankNo" resultType="java.util.Map">
+		SELECT RANK_NM,COUNT(VACT_NO) APRVCNT FROM
+		    (SELECT 
+		        V.* ,A.* ,(SELECT RANK_NM FROM RANK WHERE RANK_NO = A.EMP_RANKNO)RANK_NM
+		    FROM VACATION V, EMPLOYEE A WHERE V.VACT_ID = A.EMP_ID AND  VACT_APRVYN = 'N' AND VACT_DELYN = 'N')
+		GROUP BY RANK_NM
+	</select>
+	<select id="selectVactRemCntByDeptNoAndRankNo" resultType="java.util.Map">
+		<![CDATA[
+			SELECT  VACT_DEPTNM,VACT_RANKNM,AVG(VACT_USECNT) AVGUSECNT FROM
+			(SELECT A.*, NVL(B.USECNT,0) VACT_USECNT, NVL((A.VACCNT - B.USECNT),A.VACCNT) VACT_REMCNT
+			FROM    (
+			            SELECT A.*,
+			                    (CASE WHEN A.WORKYEAR = 0 THEN A.WORKMONTH
+			                    WHEN (A.WORKYEAR > 0 AND A.WORKYEAR <= 2) THEN 15
+			                    WHEN (A.WORKYEAR > 2 AND A.WORKYEAR <= 4) THEN 16
+			                    WHEN (A.WORKYEAR > 4 AND A.WORKYEAR <= 6) THEN 17
+			                    WHEN (A.WORKYEAR > 6 AND A.WORKYEAR <= 8) THEN 18
+			                    WHEN (A.WORKYEAR > 8 AND A.WORKYEAR <= 10) THEN 19
+			                    ELSE 25
+			                    END) AS VACCNT
+			                FROM
+			                 ( SELECT EMP_ID,EMP_NM,
+			                            EMP_DEPTNO VACT_DEPTNO,(SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = EMP_DEPTNO) VACT_DEPTNM,
+			                            EMP_RANKNO VACT_RANKNO,(SELECT RANK_NM FROM RANK WHERE RANK_NO = EMP_RANKNO)VACT_RANKNM,
+			                            EMP_JNCMPYMD,EMP_COMPNO,
+			                            TRUNC ( ( MONTHS_BETWEEN ( SYSDATE, EMP_JNCMPYMD ) ) / 12 ) WORKYEAR, 
+			                            TRUNC ( MOD( MONTHS_BETWEEN( SYSDATE, EMP_JNCMPYMD ), 12 ) ) WORKMONTH
+			                    FROM EMPLOYEE)A
+			            )A ,
+			            (
+			               SELECT VACT_ID,SUM(VACT_DAYS) USECNT
+			                FROM VACATION 
+			                WHERE (VACT_GB ='연차' OR VACT_GB = '반차') AND VACT_CRIY = TO_CHAR(SYSDATE,'YYYY') AND VACT_APRVYN ='Y'
+			                GROUP BY VACT_ID 
+			            )B
+			WHERE A.EMP_ID = B.VACT_ID(+) AND A.EMP_COMPNO = 9999) 
+			GROUP BY  VACT_DEPTNM,VACT_RANKNM
+		]]>
+	</select>
+	
+	<!-- 승인대기자 수 -->
+	<select id="selectWaitAprvCount" resultType="int" parameterType="int">
+		SELECT COUNT(*) 
+		FROM VACATION
+		WHERE VACT_COMPNO = #{comp_no} AND VACT_APRVYN = 'N' AND VACT_DELYN = 'N'
+	</select>
+	<!-- 오늘날짜 기준 현재 휴가 자-->
+	<select id="selectVacatIngToday" resultType="int">
+		SELECT COUNT(*)
+		FROM VACATION
+		WHERE ( TO_DATE(SYSDATE,'YY/MM/DD') BETWEEN  VACT_SATYMD AND VACT_ENDYMD) AND VACT_APRVYN = 'Y' AND  VACT_COMPNO = #{comp_no}
+	</select>
+	<!-- 일주일 중으로 휴가 신청일 기준 반려된 사람 -->
+	<select id="selectAprvIsNCount" resultType="int">
+		SELECT COUNT(*)
+		FROM VACATION
+		WHERE (VACT_REGDT BETWEEN TO_DATE(SYSDATE,'YY/MM/DD') AND TO_DATE(SYSDATE,'YY/MM/DD') +7) AND VACT_DELYN = 'N' AND VACT_COMPNO = #{comp_no}
+	</select>
+</mapper>

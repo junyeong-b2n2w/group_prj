@@ -1,0 +1,46 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Menu-Mapper">
+	
+	<select id="selectMainMenu" resultType="menu">
+		select * 
+		from MENU, COMPANYACTIIVATIONMENU
+		where MENU_NO = CAM_MENUNO
+		and CAM_COMPNO = #{comp_no}
+		and menu_upmenuno is not null
+		order by menu_no asc
+	</select>
+	
+	
+	<select id="selectTotalMainMenu" resultType="menu">
+		select *
+		from menu
+		where menu_no like 'M__0000'
+		and menu_upmenuno is not null
+		order by menu_no asc
+	</select>
+	
+	<select id="selectSubMenu" parameterType="str" resultType="menu">
+		SELECT *
+		FROm menu
+		START WITH menu_no = #{mCode}
+		CONNECT BY PRIOR menu_no = menu_upmenuno
+	</select>
+	
+	<select id="selectMenuByMcode" resultType="menu">
+		select *
+		from menu
+		where menu_no = #{mCode}
+	</select>
+	
+	<update id="deleteMenuList">
+	
+		delete from COMPANYACTIIVATIONMENU where cam_compno  =#{comp_no}
+	</update>
+	
+	<update id="insertMenuList">
+	
+		insert into COMPANYACTIIVATIONMENU ( CAM_COMPNO,CAM_MENUNO) VALUES ( #{cam_compno},#{cam_menuno} )
+	</update>
+	
+</mapper>

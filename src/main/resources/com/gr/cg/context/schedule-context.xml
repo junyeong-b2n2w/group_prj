@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<beans:bean
+		id="testScheduler"
+		class="com.gr.cg.scheduler.TestScheduler"
+		p:mandateService-ref="mandateService"
+		p:notificationService-ref="notificationService"
+	/>
+	<scheduler id="taskScheduler"/>
+	<scheduled-tasks scheduler="taskScheduler">
+		<scheduled ref="testScheduler" method="setActvyn" cron="0 0/200 * * * *"/><!-- 200분간격으로 -->
+		<scheduled ref="testScheduler" method="mandateCheck" cron="0 0 0/1 * * *"/><!-- 1시간 마다 -->
+		<scheduled ref="testScheduler" method="setAutoReadYnIsN" cron="0 0/5 * * * *"/><!-- 5분마다 -->
+		<scheduled ref="testScheduler" method="checkReadDate" cron="0 0 0 * * *"/> <!-- 매일 오전 12시 -->
+		<scheduled ref="testScheduler" method="checkAlramList" cron="0 0/5 * * * *"/> 
+	</scheduled-tasks>
+</beans:beans>

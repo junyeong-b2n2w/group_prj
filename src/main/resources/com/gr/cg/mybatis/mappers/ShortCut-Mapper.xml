@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="ShortCut-Mapper">
+	
+	<select id="selectShortCutList" resultType="shortcut">
+		select * from SHORTCUT where SHC_ID = #{shc_id} 
+	
+	</select>
+
+<select id="selectShortCutSeqNextVal" resultType="int">
+select shortcut_seq.nextval from dual
+</select>
+
+<select id="selectShortCutByNO" resultType="shortcut">
+select * from shortcut where SHC_NO = #{shc_no} 
+</select>
+
+<update id = "insertShortCut" parameterType="shortcut">
+insert into SHORTCUT ( SHC_NO, SHC, SHC_SAVE, SHC_ID) 
+VALUES ( shortcut_seq.nextval,  #{shc}, #{shc_save}, #{shc_id}) 
+
+</update>
+
+<update id = "updateShortCut" parameterType="shortcut">
+update SHORTCUT
+    SET shc = #{shc},
+        SHC_SAVE = #{shc_save}
+    where SHC_NO = #{shc_no} 
+</update>
+<update id = "deleteShortCut" parameterType="int">
+
+delete SHORTCUT where SHC_NO =#{shc_no} 
+	</update>
+	
+</mapper>

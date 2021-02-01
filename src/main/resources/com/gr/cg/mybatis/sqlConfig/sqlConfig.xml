@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="java.lang.String" alias="str" />
+		<typeAlias type="java.lang.Integer" alias="int" />
+		<typeAlias type="com.gr.cg.dto.EmployeeVO" alias="emp" />
+		<typeAlias type="com.gr.cg.dto.WidgetOrdVO" alias="widgetord" />
+		<typeAlias type="com.gr.cg.dto.WidgetVO" alias="widget" />
+		<typeAlias type="com.gr.cg.dto.BoardVO" alias="board" />
+		<typeAlias type="com.gr.cg.dto.PostVO" alias="post" />
+		<typeAlias type="com.gr.cg.dto.MenuVO" alias="menu" />
+		<typeAlias type="com.gr.cg.dto.ApprovalVO" alias="aprv" />
+		<typeAlias type="com.gr.cg.dto.ApprovalFormVO" alias="ApprovalForm" />
+		<typeAlias type="com.gr.cg.dto.ComponentVO" alias="component" />
+		<typeAlias type="com.gr.cg.dto.FormComponentVO" alias="formComponent" />
+		<typeAlias type="com.gr.cg.dto.GChartVO" alias="gChart" />
+		<typeAlias type="com.gr.cg.dto.UserDefAprvLnVO" alias="userDefAprvLn" />
+		<typeAlias type="com.gr.cg.dto.UserAprvLnGrVO" alias="userAprvLnGr" />
+		<typeAlias type="com.gr.cg.dto.AttachVO" alias="attach" />
+		<typeAlias type="com.gr.cg.dto.DepartmentVO" alias="dept" />
+		<typeAlias type="com.gr.cg.dto.RankVO" alias="rank" />
+		<typeAlias type="com.gr.cg.dto.MandateVO" alias="mandate" />
+		<typeAlias type="org.springframework.security.core.authority.SimpleGrantedAuthority" alias="simAu" />
+		<typeAlias type="com.gr.cg.dto.FormFavoriteVO" alias="formfav" />
+		<typeAlias type="com.gr.cg.dto.NoticeVO" alias="notice" />
+		<typeAlias type="com.gr.cg.dto.ReplyVO" alias="reply" />
+		<typeAlias type="com.gr.cg.dto.ElecDocumentVO" alias="elecDocument" />
+		<typeAlias type="com.gr.cg.dto.ReceiverVO" alias="receiver" />
+		<typeAlias type="com.gr.cg.dto.ApprovalRefVO" alias="aprvRef" />
+		<typeAlias type="com.gr.cg.dto.ConsensusVO" alias="cons" />
+		<typeAlias type="com.gr.cg.dto.CalendarVO" alias="calendar" />
+		<typeAlias type="com.gr.cg.dto.EmpInformationVO" alias="empRoleInfo" />
+		<typeAlias type="com.gr.cg.dto.VacationVO" alias="vacation" />
+		<typeAlias type="com.gr.cg.dto.TaskVO" alias="task" />
+		<typeAlias type="com.gr.cg.dto.PerformerVO" alias="performer" />
+		<typeAlias type="com.gr.cg.dto.AttendanceVO" alias="attend" />
+		<typeAlias type="com.gr.cg.dto.ShortcutVO" alias="shortcut" />
+		<typeAlias type="com.gr.cg.dto.CompanyVO" alias="Company" />
+		<typeAlias type="com.gr.cg.command.AttendCommand" alias="attdCom" />
+		<typeAlias type="com.gr.cg.command.RoleAttendCommand" alias="roleAttdCom" />
+		<typeAlias type="com.gr.cg.command.EmployeePageCommand" alias="empCom" />
+		<typeAlias type="com.gr.cg.dto.NotificationVO" alias="noti" />
+		<typeAlias type="com.gr.cg.dto.DeptHeadVO" alias="dHead" />
+		<typeAlias type="com.gr.cg.dto.EnglishVO" alias="english" />
+	</typeAliases>
+</configuration>

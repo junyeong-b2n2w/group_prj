@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Notice-Mapper">
+	<sql id="search">
+		<if test="searchType == 't'.toString()">
+			AND NTC_TITLE LIKE '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'c'.toString()">
+			AND NTC_CONT LIKE '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			and (
+			NTC_TITLE like '%'||#{keyword}||'%'
+			or
+			NTC_CONT like '%'||#{keyword}||'%'						
+			)			
+		</if>
+		
+	</sql>
+	
+	
+	<select id="selectwidget" resultType="notice" parameterType="int">
+		select *
+        from(
+        SELECT
+		    NTC_NO,NTC_TITLE, NTC_CONT,NTC_REGDT,NTC_REGUDT,
+		    NTC_POPYN,NTC_POPSATYMD,NTC_POPENDYMD,NTC_VIEWS, NTC_DELYN,NTC_WRITERID,NTC_ATTCKEY
+		FROM
+		    NOTICE
+		WHERE NTC_NO IS NOT NULL
+		
+		AND NTC_DELYN='N'
+		AND NTC_COMPNO = #{ntc_compno}
+		ORDER BY NTC_REGDT DESC
+        )
+        where rownum &lt;=4
+	</select>
+	
+	<select id="selectNoticeList"  resultType="notice">
+		SELECT
+		    NTC_NO,NTC_TITLE, NTC_CONT,NTC_REGDT,NTC_REGUDT,
+		    NTC_POPYN,NTC_POPSATYMD,NTC_POPENDYMD,NTC_VIEWS, NTC_DELYN,NTC_WRITERID,NTC_ATTCKEY
+		FROM
+		    NOTICE
+		WHERE NTC_NO IS NOT NULL
+		<include refid="search" />
+		AND NTC_DELYN='N'
+		AND NTC_COMPNO = #{comp_no}
+		ORDER BY NTC_REGDT DESC
+	</select>
+	
+	<select id="selectNoticeListCount" resultType="int">
+		SELECT
+		COUNT(*) 
+		FROM NOTICE
+		WHERE NTC_NO IS NOT NULL
+		<include refid="search" />
+		AND NTC_DELYN='N'
+		AND NTC_COMPNO = #{comp_no}
+		ORDER BY NTC_REGDT DESC
+		
+	</select>
+	<select id="selectNoticeByNoticeNo"  resultType="notice">
+		SELECT
+		    NTC_NO,NTC_TITLE, NTC_CONT,NTC_REGDT,NTC_REGUDT,
+		    NTC_POPYN,NTC_POPSATYMD,NTC_POPENDYMD,NTC_VIEWS, NTC_DELYN,NTC_WRITERID,NTC_ATTCKEY
+		FROM
+		    NOTICE
+		WHERE NTC_NO=#{ntc_no}
+	</select>
+	
+	
+	<select id="selectNoticeSequenceNextValue" resultType="int">
+		SELECT NOTICE_SEQ.NEXTVAL
+		FROM DUAL
+	</select>
+	
+	
+	<update id="insertNotice" parameterType="notice">
+	
+		INSERT INTO 
+		NOTICE(NTC_NO,NTC_TITLE,NTC_CONT,NTC_REGDT,NTC_POPYN,NTC_POPSATYMD,NTC_POPENDYMD,NTC_VIEWS,NTC_DELYN,NTC_WRITERID,NTC_ATTCKEY,NTC_COMPNO)
+		VALUES(#{ntc_no},#{ntc_title},#{ntc_cont},SYSDATE,NVL(#{ntc_popyn},'N'),TO_DATE(#{ntc_popsatymd},'YYYY-MM-DD"T"HH24:MI'),TO_DATE(#{ntc_popendymd},'YYYY-MM-DD"T"HH24:MI'),0,'N',#{ntc_writerid},#{ntc_attckey,jdbcType=VARCHAR},#{ntc_compno})
+	</update>	
+	
+	<update id="updateNotice" parameterType="notice">
+		UPDATE NOTICE 
+		SET 
+		NTC_TITLE=#{ntc_title},NTC_CONT=#{ntc_cont},	
+		NTC_REGUDT=SYSDATE,
+		NTC_POPYN=#{ntc_popyn},
+		NTC_POPSATYMD = TO_DATE(#{ntc_popsatymd},'YYYY-MM-DD"T"HH24:MI'),
+		NTC_POPENDYMD = TO_DATE(#{ntc_popendymd},'YYYY-MM-DD"T"HH24:MI'),
+		NTC_ATTCKEY = #{ntc_attckey,jdbcType=VARCHAR}
+		WHERE NTC_NO=#{ntc_no}
+	</update>
+	<update id="updatePopYN" parameterType="notice">
+		UPDATE NOTICE 
+		SET 
+		NTC_POPYN=#{ntc_popyn},NTC_POPSATYMD=#{ntc_popsatymd},NTC_POPENDYMD=#{ntc_popendymd}
+		WHERE NTC_NO=#{ntc_no}
+	</update>
+	
+	<update id="deleteNotice" parameterType="int" >
+	
+		UPDATE NOTICE 
+		SET 
+		NTC_DELYN='Y'
+		WHERE NTC_NO=#{ntc_no}
+	</update>
+	
+	<update id="increaseViewCount" parameterType="int">
+		UPDATE NOTICE
+		SET NTC_VIEWS= NTC_VIEWS+1
+		WHERE NTC_NO=#{ntc_no}
+	</update>
+	
+	
+	<select id="selectFileList" resultType="attach" parameterType="int">
+	
+			SELECT C.*
+			FROM NOTICE A, ATTACHMENTS C
+			WHERE A.NTC_ATTCKEY = C.ATTC_KEY
+	        AND A.NTC_NO = #{ntc_no} AND ATTC_DELETYN = 'N'
+	
+	</select>
+	
+	
+	<select id="selectNoticeListByPopYNIsY" resultType="notice" parameterType="int">
+	
+		SELECT NTC_NO,NTC_TITLE,NTC_CONT,NTC_REGDT,NTC_POPYN,NTC_POPSATYMD,NTC_POPENDYMD,NTC_VIEWS,NTC_DELYN,NTC_WRITERID,NTC_ATTCKEY 
+		FROM NOTICE
+		WHERE NTC_POPYN  = 'Y' AND NTC_COMPNO = #{ntc_compno}
+	
+	</select>
+	<select id="selectEmpListByAlram" resultType="emp" parameterType="emp">
+	
+		SELECT
+		EMP_ID ,EMP_DEPTNO ,EMP_RANKNO ,EMP_COMPNO,EMP_NM ,EMP_PIC,EMP_EMPNO ,EMP_TNRSTT,EMP_JNCMPYMD,EMP_ACTVYN,
+		DEPT_NO ,DEPT_NM ,DEPT_ACTVYN,COMP_NO,COMP_NM ,COMP_ACTVYN,RANK_NM 
+		FROM EMPLOYEE,
+		DEPARTMENT, COMPANY,
+		RANK
+		WHERE 1=1
+		AND
+		EMP_DEPTNO = DEPT_NO
+		AND EMP_COMPNO = #{emp_compno}
+		AND EMP_COMPNO = COMP_NO
+		AND RANK_NO = EMP_RANKNO
+		AND EMP_ACTVYN = 'Y'
+		AND DEPT_ACTVYN = 'Y'
+		AND COMP_ACTVYN = 'Y'
+		AND EMP_ID != #{emp_id}
+	</select>
+</mapper>

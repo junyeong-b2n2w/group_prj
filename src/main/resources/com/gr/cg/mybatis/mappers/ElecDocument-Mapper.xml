@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ElecDocument-Mapper">
+	<update id="insertElecDocument" parameterType="elecDocument">
+		INSERT INTO ELECTRONICDOCUMENT
+		(ED_NO, ED_DFTR, ED_LASTAPVR, ED_APRVSTT, ED_APRVTITLE, ED_APRV, ED_FORMNO, ED_DEPTNO, ED_TASKNO, ED_ATTCKEY, ED_REGYMD)
+		VALUES(#{ed_no}, #{ed_dftr}, #{ed_lastapvr,jdbcType=VARCHAR}, #{ed_aprvstt}, #{ed_aprvtitle}, #{ed_aprv,jdbcType=VARCHAR}, #{ed_formno}, #{ed_deptno}, #{ed_taskno,jdbcType=VARCHAR}, #{ed_attckey,jdbcType=VARCHAR}, sysdate)
+	</update>
+	<select id="selectSeq" resultType="int">
+		SELECT elecdocument_seq.nextval FROM dual
+	</select>
+	<select id="selectAprvListByUserId" resultType="elecDocument">
+	 	SELECT *
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+		        FROM(SELECT ED_NO,ED_DFTR,ED_REGYMD,ED_COMYMD,ED_APRVSTT,ED_APRVTITLE,ED_APRV,ED_TASKNO,ED_ATTCKEY,
+					    (SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = ED_DEPTNO) ED_DEPTNM,
+					    (SELECT AF_NM FROM APPROVALFORM WHERE AF_NO = ED_FORMNO) ED_FORMNM,EMPID, CODE, ASGMDT,
+					    (SELECT EMP_NM FROM EMPLOYEE WHERE ED_DFTR = EMP_ID) ED_EMPNM
+					FROM ELECTRONICDOCUMENT,
+					    (SELECT APRV_EMPID EMPID,APRV_EDNO EDNO,APRV_AS CODE,APRV_ASGMDT ASGMDT, APRV_PRINTYN YN
+					    FROM APPROVAL UNION 
+					    SELECT CONS_EMPID,CONS_EDNO,CONS_AGRESTT,CONS_ASGMDT,CONS_PRINTYN
+					    FROM CONSENSUS) A 
+					WHERE EMPID = #{searchno} AND ED_NO = EDNO AND YN = 'Y' AND ED_APRVSTT IN('DED01','DED03','DED04','DED05')
+					ORDER BY ${orderby} ${asc}) A
+		        WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>)
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+	</select>
+	<select id="selectEdocListByUserId" resultType="elecDocument">
+	 	SELECT *
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+		        FROM(SELECT ED_NO,ED_DFTR,ED_REGYMD,ED_COMYMD,ED_APRVSTT,ED_APRVTITLE,ED_APRV,ED_TASKNO,ED_ATTCKEY,
+				    (SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = ED_DEPTNO) ED_DEPTNM,
+				    (SELECT AF_NM FROM APPROVALFORM WHERE AF_NO = ED_FORMNO) ED_FORMNM,
+				    (SELECT EMP_NM FROM EMPLOYEE WHERE ED_DFTR = EMP_ID) ED_EMPNM
+						FROM ELECTRONICDOCUMENT
+						WHERE ED_DFTR = #{searchno} AND ED_APRVSTT NOT IN('DED07','DED02','DED05','DED06') ORDER BY ${orderby} ${asc}) A
+		        WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>)
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+	</select>
+	<select id="selectSaveListByUserId" resultType="elecDocument">
+	 	SELECT *
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+		        FROM(SELECT ED_NO,ED_DFTR,ED_REGYMD,ED_COMYMD,ED_APRVSTT,ED_APRVTITLE,ED_APRV,ED_TASKNO,ED_ATTCKEY,
+				    (SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = ED_DEPTNO) ED_DEPTNM,
+				    (SELECT AF_NM FROM APPROVALFORM WHERE AF_NO = ED_FORMNO) ED_FORMNM,
+				    (SELECT EMP_NM FROM EMPLOYEE WHERE ED_DFTR = EMP_ID) ED_EMPNM
+						FROM ELECTRONICDOCUMENT
+						WHERE ED_DFTR = #{searchno} AND ED_APRVSTT IN('DED02','DED05','DED06') ORDER BY ${orderby} ${asc}) A
+		        WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>)
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+	</select>
+	<select id="selectEdocForDetail" resultType="elecDocument">
+		SELECT ELECTRONICDOCUMENT.* ,
+            (SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = ED_DEPTNO) ED_DEPTNM,
+            (SELECT AF_NM FROM APPROVALFORM WHERE AF_NO = ED_FORMNO) ED_FORMNM,
+		    (SELECT EMP_NM FROM EMPLOYEE WHERE EMP_ID = ED_DFTR) ED_EMPNM,
+		    (SELECT RANK_NM
+            FROM (SELECT RANK_NM,EMP_ID FROM EMPLOYEE,RANK WHERE EMP_RANKNO = RANK_NO)
+            WHERE EMP_ID = ED_DFTR) ED_RANKNM
+        FROM ELECTRONICDOCUMENT 
+        WHERE ED_NO = #{edno}
+	</select>
+	<select id="selectConsForDetail" resultType="cons">
+		SELECT CONSENSUS.*,EMP_NM,
+		    (SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = EMP_DEPTNO) DEPT_NM,
+		    (SELECT RANK_NM FROM RANK WHERE RANK_NO = EMP_RANKNO) RANK_NM
+		FROM CONSENSUS, EMPLOYEE
+		WHERE CONS_EMPID = EMP_ID
+		AND CONS_EDNO = #{edno}
+		ORDER BY CONS_ORD
+	</select>
+	<select id="selectAprvForDetail" resultType="aprv">
+		SELECT APPROVAL.*,EMP_NM,
+		    (SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = EMP_DEPTNO) DEPT_NM,
+		    (SELECT RANK_NM FROM RANK WHERE RANK_NO = EMP_RANKNO) RANK_NM
+		FROM APPROVAL, EMPLOYEE
+		WHERE APRV_EMPID = EMP_ID
+		AND APRV_EDNO = #{edno}
+		ORDER BY APRV_ORD
+	</select>
+	<select id="selectRecForDetail" resultType="receiver">
+		SELECT RECEIVER.*,EMP_NM,
+		    (SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = EMP_DEPTNO) DEPT_NM,
+		    (SELECT RANK_NM FROM RANK WHERE RANK_NO = EMP_RANKNO) RANK_NM
+		FROM RECEIVER, EMPLOYEE
+		WHERE REC_EMPID = EMP_ID
+		AND REC_EDNO = #{edno}
+	</select>
+	<select id="selectRefForDetail" resultType="aprvRef">
+		SELECT APPROVALREFERENCE.*,EMP_NM,
+		    (SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = EMP_DEPTNO) DEPT_NM,
+		    (SELECT RANK_NM FROM RANK WHERE RANK_NO = EMP_RANKNO) RANK_NM
+		FROM APPROVALREFERENCE, EMPLOYEE
+		WHERE AR_EMPID = EMP_ID
+		AND AR_EDNO = #{edno}
+	</select>
+	<select id="selectAttachList" resultType="attach" parameterType="int">
+		SELECT C.*
+		FROM ELECTRONICDOCUMENT A, ATTACHMENTS C
+		WHERE A.ED_ATTCKEY = C.ATTC_KEY
+		AND A.ED_NO = #{edno} AND ATTC_DELETYN = 'N'
+	</select>
+	<update id="deleteElecDocument">
+		DELETE FROM ELECTRONICDOCUMENT WHERE ED_NO = ${edno}
+	</update>
+	
+	<select id="selectAllAprvLnByEdno" resultType="aprv">
+		SELECT A.*,EMP_NM,
+			    (SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = EMP_DEPTNO) DEPT_NM,
+			    (SELECT RANK_NM FROM RANK WHERE RANK_NO = EMP_RANKNO) RANK_NM
+	    FROM
+	    (SELECT aprv_no,aprv_edno,aprv_asgmdt,aprv_idntydt,aprv_dt,aprv_ord,aprv_printyn,aprv_empid,aprv_as,aprv_attckey,aprv_comm
+	    FROM APPROVAL UNION 
+	    SELECT CONS_NO,CONS_EDNO,CONS_ASGMDT,CONS_IDNTYDT,CONS_AGREDT,CONS_ORD,CONS_PRINTYN,CONS_EMPID,CONS_AGRESTT, '-',CONS_COMM
+	    FROM CONSENSUS) A, EMPLOYEE
+	    WHERE aprv_edno = #{edno} AND aprv_printyn = 'Y' AND EMP_ID = aprv_empid
+	    ORDER BY APRV_ORD
+	</select>
+	<update id="collectElecDocument">
+		UPDATE ELECTRONICDOCUMENT SET ED_APRVSTT = 'DED06' WHERE ED_NO = ${edno}
+	</update>
+	<select id="selectAprvDates" parameterType="map" resultType="aprv">
+		SELECT *
+		FROM
+			(SELECT aprv_no,aprv_edno,aprv_asgmdt,aprv_idntydt,aprv_dt,aprv_ord,aprv_printyn,aprv_empid,aprv_as,aprv_attckey,aprv_comm
+			FROM APPROVAL UNION 
+			SELECT CONS_NO,CONS_EDNO,CONS_ASGMDT,CONS_IDNTYDT,CONS_AGREDT,CONS_ORD,CONS_PRINTYN,CONS_EMPID,CONS_AGRESTT, '-',CONS_COMM
+			FROM CONSENSUS)
+		WHERE APRV_EDNO = #{edno} AND APRV_EMPID = #{id}
+	</select>
+	<update id="updateAprvChkDate">
+		UPDATE APPROVAL SET aprv_idntydt = sysdate WHERE aprv_no = ${aprvno}
+	</update>
+	<update id="updateConsChkDate">
+		UPDATE CONSENSUS SET CONS_IDNTYDT = sysdate WHERE CONS_NO = ${consno}
+	</update>
+	
+	<select id="selectRefReadList" resultType="elecDocument">
+		SELECT *
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+		        FROM(SELECT ED_NO,ED_DFTR,ED_REGYMD,ED_COMYMD,ED_APRVSTT,ED_APRVTITLE,ED_APRV,ED_TASKNO,ED_ATTCKEY,
+			    (SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = ED_DEPTNO) ED_DEPTNM,
+			    (SELECT AF_NM FROM APPROVALFORM WHERE AF_NO = ED_FORMNO) ED_FORMNM,
+			    (SELECT EMP_NM FROM EMPLOYEE WHERE ED_DFTR = EMP_ID) ED_EMPNM
+			FROM ELECTRONICDOCUMENT
+			WHERE ED_NO IN
+			(SELECT AR_EDNO FROM APPROVALREFERENCE WHERE AR_EMPID = #{searchno} UNION
+			SELECT READ_EDNO FROM READING WHERE READ_EMPID = #{searchno})ORDER BY ${orderby} ${asc}) A
+	        WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>)
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+	</select>
+	<update id="mergeReading" parameterType="map">
+		MERGE INTO READING
+			USING DUAL
+	    ON (READ_EDNO = #{edno} AND READ_EMPID = #{empid})
+			WHEN NOT MATCHED THEN
+	    INSERT (READ_EDNO, READ_EMPID)
+	    VALUES (#{edno}, #{empid})
+	</update>
+	<select id="selectReceiverList" resultType="elecDocument">
+		SELECT *
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+		        FROM(SELECT ED_NO,ED_DFTR,ED_REGYMD,ED_COMYMD,ED_APRVSTT,ED_APRVTITLE,ED_APRV,ED_TASKNO,ED_ATTCKEY,
+			    (SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = ED_DEPTNO) ED_DEPTNM,
+			    (SELECT AF_NM FROM APPROVALFORM WHERE AF_NO = ED_FORMNO) ED_FORMNM,
+			    (SELECT EMP_NM FROM EMPLOYEE WHERE ED_DFTR = EMP_ID) ED_EMPNM
+			FROM ELECTRONICDOCUMENT
+			WHERE ED_NO IN
+			(SELECT REC_EDNO FROM RECEIVER WHERE REC_EMPID = #{searchno})
+			AND ED_APRVSTT = 'DED04'
+			ORDER BY ${orderby} ${asc}) A
+	        WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>)
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+	</select>
+	<select id="selectAprvDetail" resultType="aprv">
+		SELECT APRV_NO, APRV_EMPID, APRV_ATTCKEY, APRV_COMM, APRV_EDNO,APRV_AS,
+		(SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = EMP_DEPTNO) DEPT_NM, EMP_NM,
+		(SELECT RANK_NM FROM RANK WHERE RANK_NO = EMP_RANKNO) RANK_NM
+		FROM APPROVAL, EMPLOYEE
+		WHERE APRV_EMPID = EMP_ID
+		AND APRV_NO = #{aprv_no}
+	</select>
+	<select id="selectConsDetail" resultType="cons">
+		SELECT CONS_NO, CONS_EMPID, CONS_COMM, CONS_AGRESTT,
+			(SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = EMP_DEPTNO) DEPT_NM, EMP_NM,
+			(SELECT RANK_NM FROM RANK WHERE RANK_NO = EMP_RANKNO) RANK_NM
+		FROM CONSENSUS, EMPLOYEE
+		WHERE CONS_EMPID = EMP_ID
+		AND CONS_NO = #{cons_no}
+	</select>
+	<select id="selectAprvAttachList" resultType="attach" parameterType="int">
+		SELECT C.*
+		FROM APPROVAL A, ATTACHMENTS C
+		WHERE A.APRV_ATTCKEY = C.ATTC_KEY
+		AND A.APRV_NO = #{aprv_no} AND ATTC_DELETYN = 'N'
+	</select>
+	
+	<select id="selectMyAprvStatusCnt" parameterType="elecDocument" resultType="int">
+		SELECT COUNT(*)
+		FROM ELECTRONICDOCUMENT
+		WHERE ED_DFTR = #{ed_dftr}
+		AND ED_APRVSTT = #{ed_aprvstt}
+		AND TO_CHAR(ED_REGYMD,'YYYYMMDD') >= (TO_CHAR(sysdate, 'YYYYMMDD')-7)
+	</select>
+	<select id="selectMyAprvList" resultType="elecDocument">
+		SELECT *
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+		        FROM(SELECT *
+					FROM
+					(SELECT ELECTRONICDOCUMENT.*, DECODE(ED_COMYMD, null,ED_REGYMD, ED_COMYMD) newdate
+					FROM ELECTRONICDOCUMENT
+					WHERE ED_DFTR = #{searchno}
+					AND ED_APRVSTT NOT IN ('DED02', 'DED06', 'DED07'))
+					WHERE TO_CHAR(newdate,'YYYYMMDD') >= (TO_CHAR(sysdate, 'YYYYMMDD')-7)
+					ORDER BY newdate DESC) A
+	       )
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+	</select>
+	<select id="selectMyAprvWaitList" resultType="elecDocument">
+		SELECT *
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+		        FROM(SELECT *
+					FROM
+					(SELECT ELECTRONICDOCUMENT.*, DECODE(ED_COMYMD, null,ED_REGYMD, ED_COMYMD) newdate, APRV_ASGMDT
+					FROM
+					    (SELECT APRV_AS,APRV_EDNO,APRV_EMPID, APRV_ASGMDT FROM APPROVAL UNION SELECT CONS_AGRESTT,CONS_EDNO,CONS_EMPID, CONS_ASGMDT FROM CONSENSUS) a,
+					    ELECTRONICDOCUMENT
+					WHERE APRV_EDNO = ED_NO
+					AND APRV_EMPID = #{searchno}
+					AND APRV_AS LIKE 'DAP_' || '5')
+					WHERE TO_CHAR(newdate,'YYYYMMDD') >= (TO_CHAR(sysdate, 'YYYYMMDD')-7)
+					ORDER BY APRV_ASGMDT DESC) A
+	       )
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+	</select>
+	<select id="selectMyAprvIngList" resultType="elecDocument">
+		SELECT *
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+		        FROM(SELECT *
+					FROM
+					(SELECT ELECTRONICDOCUMENT.*, DECODE(ED_COMYMD, null,ED_REGYMD, ED_COMYMD) newdate, APRV_ASGMDT
+					FROM
+					    (SELECT APRV_AS,APRV_EDNO,APRV_EMPID, APRV_ASGMDT FROM APPROVAL UNION SELECT CONS_AGRESTT,CONS_EDNO,CONS_EMPID, CONS_ASGMDT FROM CONSENSUS) a,
+					    ELECTRONICDOCUMENT
+					WHERE APRV_EDNO = ED_NO
+					AND APRV_EMPID = #{searchno}
+					AND ED_APRVSTT IN ('DED01','DED03','DED04','DED05')
+					AND APRV_AS NOT LIKE 'DAP_' || '5')
+					WHERE TO_CHAR(newdate,'YYYYMMDD') >= (TO_CHAR(sysdate, 'YYYYMMDD')-7)
+					ORDER BY newdate DESC, APRV_ASGMDT DESC) A
+	       )
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+	</select>
+	<select id="selectMyReceiveList" resultType="elecDocument">
+		SELECT *
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+		        FROM(SELECT ELECTRONICDOCUMENT.*
+					FROM ELECTRONICDOCUMENT,(SELECT REC_EDNO FROM RECEIVER WHERE REC_EMPID = #{searchno}) A
+					WHERE ED_NO = A.REC_EDNO
+					AND ED_APRVSTT = 'DED04'
+					ORDER BY ED_COMYMD DESC) A
+	       )
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+	</select>
+</mapper>

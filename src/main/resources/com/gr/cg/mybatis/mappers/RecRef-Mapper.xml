@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RecRef-Mapper">
+	<update id="insertReceiver" parameterType="receiver">
+		INSERT INTO RECEIVER VALUES(#{rec_edno}, #{rec_empid})
+	</update>
+	<update id="insertAprvRef" parameterType="aprvRef">
+		INSERT INTO APPROVALREFERENCE(AR_NO, AR_EDNO, AR_EMPID) VALUES(aprvref_seq.nextval, #{ar_edno}, #{ar_empid})
+	</update>
+</mapper>

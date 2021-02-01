@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Approval-Mapper">
+	<select id="selectApprovalListByName" parameterType="str" resultType="gChart">
+		SELECT *
+		FROM
+		(SELECT R.*,E.EMP_ID,E.EMP_NM,E.EMP_DEPTNO,D.DEPT_NM,E.EMP_ACTVYN, E.EMP_NM||D.DEPT_NM search
+		FROM EMPLOYEE E,
+		(SELECT RANK_NO,RANK_UPRANK,RANK_NM,RANK_COMPNO,LEVEL AS RLEVEL
+		FROM RANK
+		START WITH RANK_UPRANK IS NULL
+		CONNECT BY PRIOR RANK_NO = RANK_UPRANK)R, DEPARTMENT D
+		WHERE E.EMP_RANKNO = R.RANK_NO
+		AND E.EMP_DEPTNO = D.DEPT_NO
+		ORDER BY RLEVEL)
+		WHERE search LIKE '%'||#{search}||'%'
+		AND EMP_ACTVYN = 'Y'
+	</select>
+	
+	
+	<select id="selectUserAprvLnSequence" resultType="int">
+		SELECT useraprvln_seq.nextval
+		FROM dual
+	</select>
+	
+	<update id="insertUserAprvLn" parameterType="userDefAprvLn">
+		INSERT INTO USERDEFINITIONAPPROVALLINE VALUES(#{udal_no}, #{udal_crt}, #{udal_aprvlnnm}, sysdate)
+	</update>
+	<update id="insertUserAprvLnGr" parameterType="userAprvLnGr">
+		INSERT INTO USERAPPROVALLINEGROUP VALUES(#{ualg_no}, #{ualg_empid}, #{ualg_ord}, #{ualg_aprvtype})
+	</update>
+	
+	<select id="selectUserAprvLn" resultType="userDefAprvLn">
+		SELECT *
+		FROM USERDEFINITIONAPPROVALLINE
+		WHERE UDAL_CRT = #{emp_id}
+		ORDER BY UDAL_REGYMD DESC
+	</select>
+	<select id="selectUdalListByCri" resultType="userDefAprvLn">
+		SELECT *
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+		        FROM(SELECT *
+					FROM USERDEFINITIONAPPROVALLINE
+					WHERE UDAL_CRT = #{searchno} ORDER BY ${orderby} ${asc}) A
+		        WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>)
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+	</select>
+	<select id="selectUserAprvLnGr" resultType="userAprvLnGr">
+		SELECT USERAPPROVALLINEGROUP.*, EMPLOYEE.emp_nm, DEPARTMENT.DEPT_NM, (SELECT RANK_NM FROM RANK WHERE EMPLOYEE.EMP_RANKNO = RANK.RANK_NO) RANK_NM
+		FROM USERAPPROVALLINEGROUP, EMPLOYEE, DEPARTMENT
+		WHERE UALG_NO = #{ualg_no}
+		AND UALG_EMPID = EMP_ID
+		AND EMP_DEPTNO = DEPT_NO
+		ORDER BY UALG_ORD
+	</select>
+	
+	<update id="deleteUserAprvLn">
+		DELETE FROM USERDEFINITIONAPPROVALLINE WHERE udal_no = #{udal_no}
+	</update>
+	
+	<select id="selectVacAprvDept" resultType="str">
+		SELECT DEPTHD_EMPID
+		FROM EMPLOYEE, DEPARTMENTHEAD
+		WHERE EMP_ID = #{empid}
+		AND EMP_DEPTNO = DEPTHD_DEPTNO
+	</select>
+	<select id="selectVacAprvTop" resultType="str">
+		SELECT MAX(EMP_ID)
+		FROM EMPLOYEE, (SELECT LEVEL AS RLEVEL, RANK_NO FROM RANK START WITH RANK_UPRANK IS NULL CONNECT BY PRIOR RANK_NO = RANK_UPRANK) A
+		WHERE EMP_ID NOT IN(SELECT DEPTHD_EMPID FROM DEPARTMENTHEAD)
+		AND RANK_NO = EMP_RANKNO
+		AND RLEVEL = 1
+	</select>
+</mapper>

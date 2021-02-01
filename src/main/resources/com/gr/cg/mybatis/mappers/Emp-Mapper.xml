@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Emp-Mapper">
+
+
+	<sql id="search">
+		<if test="searchType == 'c'.toString()">
+			and comp_nm like '%'||#{keyword}||'%'
+		</if>
+		
+		<if test="searchType == 'b'.toString()">
+			and dept_nm like '%'||#{keyword}||'%'
+		</if>
+		
+		<if test="searchType == 'n'.toString()">
+			and emp_nm like '%'||#{keyword}||'%'
+		</if>
+		
+		<if test="searchType == 'r'.toString()">
+			and rank_nm like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'p'.toString()">
+			and emp_pos like '%'||#{keyword}||'%'
+		</if>
+		
+		
+	</sql>
+
+		<sql id="search2">
+			<if test="searchType2 == 'na'.toString()">
+				and emp_actvyn = 'N'
+			</if>
+			<if test="searchType2 == 'ac'.toString()">
+				and emp_actvyn = 'Y'
+			</if>
+		</sql>
+
+
+	<select id="selectEmpById" parameterType="str" resultType="emp">
+		SELECT EMPLOYEE.*, DEPARTMENT.*, COMPANY.*, RANK.RANK_NM
+		FROM EMPLOYEE,
+		DEPARTMENT, COMPANY,
+		RANK
+		WHERE EMP_ID = #{emp_id}
+		AND EMP_DEPTNO =
+		DEPT_NO
+		AND EMP_COMPNO = COMP_NO
+		AND RANK_NO = EMP_RANKNO
+	</select>
+
+	<select id="selectEmpList" resultType="emp">
+		SELECT EMPLOYEE.*,
+		DEPARTMENT.*, COMPANY.*,  RANK.RANK_NM
+		FROM EMPLOYEE,
+		DEPARTMENT, COMPANY,
+		RANK
+		WHERE 1=1
+		AND
+		EMP_DEPTNO = DEPT_NO
+		AND EMP_COMPNO = #{comp_no}
+		AND EMP_COMPNO = COMP_NO
+	
+		AND RANK_NO = EMP_RANKNO
+	</select>
+
+
+
+	<resultMap type="HashMap" id="empMap">
+
+		<id column="emp_id" property="emp_id" />
+		<id column="emp_nm" property="emp_nm" />
+		<id column="comp_nm" property="comp_nm" />
+		<id column="dept_nm" property="dept_nm" />
+		<id column="dept_actvyn" property="dept_actvyn" />
+		<id column="rank_nm" property="rank_nm" />
+		<id column="emp_no" property="emp_no" />
+		<id column="emp_actvyn" property="emp_actvyn" />
+		<id column="emp_pos" property="emp_pos" />
+	</resultMap>
+
+
+
+	<select id="selectEmpMapList" resultMap="empMap">
+		SELECT EMPLOYEE.*, DEPARTMENT.*, COMPANY.*, RANK.RANK_NM
+		FROM EMPLOYEE,
+		DEPARTMENT, COMPANY,
+		RANK
+		WHERE 1=1
+		AND EMP_DEPTNO = DEPT_NO
+		AND EMP_COMPNO = COMP_NO
+		AND	EMP_COMPNO = #{comp_no}
+		<include refid="search" />
+		<include refid="search2" />
+		AND RANK_NO = EMP_RANKNO
+	</select>
+
+
+
+
+	<select id="selectEmpListTotalCount" resultType="int">
+		SELECT count(*)
+		FROM EMPLOYEE, DEPARTMENT, COMPANY,
+		RANK
+		WHERE 1=1
+		AND EMP_DEPTNO = DEPT_NO
+		AND EMP_COMPNO = COMP_NO
+		AND EMP_COMPNO = #{comp_no}
+				<include refid="search" />
+				<include refid="search2" />
+		AND RANK_NO = EMP_RANKNO
+	</select>
+
+
+
+	<select id="getEmpRoles" parameterType="str" resultType="simAu">
+		select ROLE_NM as role from EMPLOYEEROLEINFORMATION, ROLE
+		where
+		EMPLOYEEROLEINFORMATION.ERI_ROLENO = ROLE_NO
+		and
+		eri_empid = #{emp_id}
+
+	</select>
+
+	<select id="isEmpId" parameterType="str" resultType="int">
+		select
+		count(*)
+		from EMPLOYEE
+		where emp_id = #{emp_id}
+	</select>
+
+
+	<update id="updatePassword" parameterType="emp">
+		update EMPLOYEE set
+		EMP_PASS = #{emp_pass}, EMP_PWEX='N' where emp_id =#{emp_id}
+	</update>
+
+
+	<update id="resetPassword" parameterType="emp">
+		update EMPLOYEE set
+		EMP_PASS = #{emp_pass}, EMP_PWEX='Y' where emp_id =#{emp_id}
+	</update>
+	
+	<update id="insertEmployee" parameterType="emp">
+		insert into EMPLOYEE
+			(EMP_ID,
+			 EMP_REGR,
+			 EMP_DEPTNO,
+			 EMP_RANKNO,
+			 EMP_COMPNO,
+			 EMP_PASS,
+			 EMP_NM,
+			 EMP_GEND,
+			 EMP_BRDT,
+			 EMP_PIC,
+			 EMP_INEMAIL,
+			 EMP_OUTEMAIL,
+			 EMP_EMPNO,
+			 EMP_PH,
+			 EMP_POS,
+			 EMP_TNRSTT,
+			 EMP_SALCTRSTDD,
+			 EMP_JNCMPYMD,
+			 EMP_PROTER_ENDYMD,
+			 EMP_YSAL,
+			 EMP_ACTVYN,
+			 EMP_UDTID)
+		values 
+			(#{emp_id},
+			 #{emp_regr},
+			 #{emp_deptno},
+			 #{emp_rankno},
+			 #{emp_compno},
+			 #{emp_pass},
+			 #{emp_nm},
+			 #{emp_gend},
+			 to_date(#{emp_brdt},'yyyy-mm-dd'),
+			 #{emp_pic},
+			 #{emp_inemail},
+			 #{emp_outemail},
+			 #{emp_empno},
+			 #{emp_ph},
+			 #{emp_pos},
+			 #{emp_tnrstt},
+			 #{emp_salctrstdd},
+			 to_date(#{emp_jncmpymd},'yyyy-mm-dd'),
+			 to_date(#{emp_proter_endymd},'yyyy-mm-dd'),
+			 #{emp_ysal},
+			 #{emp_actvyn},
+			 #{emp_udtid})
+	</update>
+	
+	<update id="updateEmp" parameterType="emp">
+		update  EMPLOYEE set
+			
+			 emp_deptno          =			 #{emp_deptno},
+			 emp_rankno          =			 #{emp_rankno},
+			 emp_nm              =			 #{emp_nm},
+			 emp_gend            =			 #{emp_gend},
+			 emp_brdt            =			 #{emp_brdt},
+			 emp_pic             =			 #{emp_pic},
+			 emp_inemail         =			 #{emp_inemail},
+			 emp_outemail        =			 #{emp_outemail},
+			 emp_empno           =			 #{emp_empno},
+			 emp_ph              =			 #{emp_ph},
+			 emp_pos             =			 #{emp_pos},
+			 emp_tnrstt          =			 #{emp_tnrstt},
+			 emp_salctrstdd      =			 #{emp_salctrstdd},
+			 emp_jncmpymd        =			 #{emp_jncmpymd},
+			 emp_proter_endymd   =			 #{emp_proter_endymd},
+			 emp_ysal            =			 #{emp_ysal},
+			 emp_actvyn          =			 #{emp_actvyn},
+			 emp_udtid           =			 #{emp_udtid},
+			 emp_udtdt          =			 sysdate
+		where emp_id   =#{emp_id}
+	</update>
+	 
+	<update id="dropRole" parameterType="String">
+			delete from employeeroleinformation where eri_empid like #{emp_empid}
+	</update>
+	
+	<update id="grantRole" parameterType="empRoleInfo">
+			insert into employeeroleinformation 
+				(eri_roleno, eri_empid, eri_regid, eri_regdt, eri_udtid, eri_udtdt) 
+		values (#{eri_roleno}, #{eri_empid}, #{eri_regid}, default, #{eri_regid}, default)
+	</update>
+	
+	<sql id="chart">
+		<if test="1 == 1">
+			''
+		</if>
+		<if test="dept_ck == 'deptOn'.toString()">
+			||dept_nm||' '
+		</if>
+		
+		<if test="rank_ck == 'rankOn'.toString()">
+			||rank_nm||' '
+		</if>
+		
+		<if test="gend_ck == 'gendOn'.toString()">
+			||emp_gend
+		</if>
+		
+	</sql>
+	
+	<select id="getChart" resultType="HashMap">
+		SELECT
+
+      
+      
+      NVL(<include refid="chart" /> ,'회사')
+       as name,  count(*) as count
+
+		FROM EMPLOYEE,
+				DEPARTMENT, COMPANY, 
+				RANK
+				WHERE 1=1
+				AND
+				EMP_DEPTNO = DEPT_NO
+				AND EMP_ACTVYN ='Y'
+				AND EMP_RANKNO = RANK_NO
+				AND EMP_COMPNO = COMP_NO
+				AND EMP_COMPNO = #{comp_no}
+		
+	
+				AND RANK_NO = EMP_RANKNO
+		group by  NVL(<include refid="chart" />  ,'회사')
+
+	</select>
+	
+	
+	
+	<select id="selectRoleCount" resultType="HashMap">
+			select ROLE_NM as name, count(ROLE_NM) as count from EMPLOYEE, ROLE, EMPLOYEEROLEINFORMATION
+		where emp_id = ERI_EMPID and ERI_ROLENO = ROLE_NO
+		AND EMP_ACTVYN ='Y'
+		and EMP_COMPNO = #{comp_no}
+		group by ROLE_NM
+	</select>
+	
+	<update id="insertTopEmp" parameterType="emp">
+		INSERT INTO
+			employee (emp_id ,
+					emp_regr ,
+					emp_deptno ,
+					emp_rankno ,
+					emp_compno ,
+					emp_pass ,
+					emp_nm ,
+					emp_brdt ,
+					emp_empno ,
+					emp_ph ,
+					emp_pos ,
+					emp_tnrstt ,
+					emp_jncmpymd)
+			VALUES (
+					#{emp_id},
+					#{emp_regr},
+					#{emp_deptno},
+					#{emp_rankno},
+					#{emp_compno},
+					#{emp_pass},
+					#{emp_nm},
+					SYSDATE,
+					0,
+					#{emp_ph},
+					'회사',
+					'재직',
+					SYSDATE
+			)
+	</update>
+	
+	<select id="selectCmListByCompNo" resultType="HashMap">
+		select * from company, EMPLOYEE, EMPLOYEEROLEINFORMATION
+		
+		where COMPANY.COMP_NO = EMP_COMPNO
+		and EMP_ID = ERI_EMPID
+		and ERI_ROLENO = 2
+		and COMP_NO =#{comp_no}
+	</select>
+</mapper>

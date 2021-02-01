@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Performer-Mapper">
+	<update id="insertPerformer">
+		insert into performer
+		(
+		PERF_TASCNO,
+		PERF_EMPID,
+		PERF_ATTCKEY
+
+		)
+		values(#{perf_tascno},#{perf_empid},#{perf_attckey,jdbcType=VARCHAR})
+	</update>
+
+<!-- 	<update id="updatePerformer" parameterType="performer"> -->
+<!-- 		update performer -->
+<!-- 		set -->
+<!-- 		perf_empid  -->
+<!-- 		where perf_tascno = #{perf_tascno}  -->
+<!-- 	</update> -->
+
+	<update id="insertProcessingHistory" parameterType="performer">
+		update
+		performer
+		set perf_progress= #{perf_progress}, perf_cont = #{perf_cont}, perf_attckey = #{perf_attckey,jdbcType=VARCHAR}
+		where perf_tascno =#{perf_tascno} and perf_empid = #{perf_empid}
+	</update>
+	
+	<select id="selectReturnPerformerList" resultType="performer" parameterType="int">
+		
+		select *
+		from performer
+		where perf_tascno = #{perf_tascno}
+	</select>
+	
+	
+	<update id="BusinessApprovalPerfBack" parameterType="task">
+		update performer
+	    set perf_stt ='반려',perf_rere = #{perf_rere}
+	    where perf_tascno = #{perf_tascno} and perf_empid = #{perf_empid}
+	</update>
+
+	<update id="BusinessApprovalPer" parameterType="task">
+		update performer
+		set perf_stt ='진행'
+		where perf_tascno = #{perf_tascno} and perf_empid = #{perf_empid}
+	</update>
+
+
+	<select id="selectPerformerWork" resultType="performer" parameterType="performer">
+		select *
+		from performer
+		where perf_tascno = #{perf_tascno} and perf_empid = #{perf_empid}
+	
+	</select>
+
+
+	<select id="selectFileList" resultType="attach"
+		parameterType="performer">
+		SELECT C.*
+		FROM performer A, ATTACHMENTS C
+		WHERE A.perf_ATTCKEY = C.ATTC_KEY
+		AND A.perf_tascno = #{perf_tascno} AND ATTC_DELETYN = 'N' AND perf_empid = #{perf_empid}
+
+	</select>
+
+	<select id="selectPerformerByPerformerNo" resultType="performer"
+		parameterType="performer">
+		select *
+		from performer 
+		where perf_tascno = #{perf_tascno} and perf_empid = #{perf_empid} 
+	</select>
+	
+	<update id="deletePerformer" parameterType="int">
+		update performer
+		set perf_delyn = 'Y'
+		where perf_tascno = #{perf_tascno}
+	</update>
+
+	<update id="removeModifyPerformer" parameterType="int">
+		delete 
+		performer
+		where perf_tascno = #{perf_tascno}
+	</update>
+
+</mapper>

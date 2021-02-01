@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Calendal-Mapper">
+
+	<select id="selectCalendar" parameterType="java.util.HashMap" resultType="calendar">
+		SELECT *
+		FROM ( SELECT *
+			   FROM calendar
+			   WHERE 1=2 
+		       <foreach collection="typeList" item="type">
+		            <if test="type == 'person'">
+		                 OR (cal_id =  #{cal_id} AND cal_rel = 'person')
+		            </if>
+		            <if test="type == 'dept'">
+		                 OR( cal_rel = 'dept' AND cal_id IN( SELECT emp_id
+		                                                     FROM employee
+		                                                     WHERE emp_deptno = (SELECT emp_deptno
+		                                                                        from employee
+		                                                                        WHERE emp_id=#{cal_id})))
+		            </if>
+		            <if test="type == 'all'">
+		                OR (cal_rel = 'all' AND cal_id IN( SELECT emp_id
+		                                                   FROM employee
+		                                                   WHERE emp_compno = ( SELECT emp_compno
+		                                                                        FROM employee
+		                                                                        WHERE emp_id=#{cal_id})))
+		            </if>                                                    
+		        </foreach>
+		       AND cal_delyn = 'n')
+		 	 WHERE cal_satdt BETWEEN TO_DATE(#{date}||'-01', 'YYYY-MM-DD')-7 AND LAST_DAY(TO_DATE(#{date}||'-01', 'YYYY-MM-DD'))+7
+		     OR cal_enddt BETWEEN TO_DATE(#{date}||'-01', 'YYYY-MM-DD')-7 AND LAST_DAY(TO_DATE(#{date}||'-01', 'YYYY-MM-DD'))+7
+	</select>
+
+	<update id="insertCalendar" parameterType="calendar">
+		INSERT INTO calendar (cal_no, cal_id, cal_title,  cal_cont, cal_color, cal_satdt, cal_enddt, cal_regdt, cal_rel,
+		    					cal_ntfcyn, cal_place, cal_url, cal_delyn
+		) VALUES (
+		    calendar_seq.NEXTVAL, #{cal_id}, #{cal_title}, #{cal_cont}, #{cal_color}, TO_DATE(#{cal_satdt}, 'YYYY-MM-DD HH24:mi'), 
+		    TO_DATE(#{cal_enddt}, 'YYYY-MM-DD HH24:mi'), SYSDATE, #{cal_rel},  #{cal_ntfcyn}, #{cal_place}, #{cal_url}, 'n'
+		)
+		<selectKey resultType="int" keyProperty="cal_no">
+			SELECT calendar_seq.CURRVAL
+			FROM dual
+		</selectKey>
+	</update>
+	
+	<update id="updateCalendar" parameterType="calendar">
+		UPDATE calendar SET
+		    cal_title  = #{cal_title },
+		    cal_cont   = #{cal_cont  },
+		    cal_color  = #{cal_color },
+		    cal_satdt  = TO_DATE(#{cal_satdt}, 'YYYY-MM-DD HH24:mi'),
+		    cal_enddt  = TO_DATE(#{cal_enddt}, 'YYYY-MM-DD HH24:mi'),
+		    cal_udtdt  = SYSDATE,
+		    cal_rel    = #{cal_rel   },
+		    cal_ntfcyn = #{cal_ntfcyn},
+		    cal_place  = #{cal_place },
+		    cal_url    = #{cal_url   }
+		WHERE cal_no   = #{cal_no    }
+		<selectKey resultType="calendar">
+			SELECT cal_no
+			FROM calendar
+			WHERE cal_no = #{cal_no}
+		</selectKey>
+	</update>
+	
+	<update id="deleteCalendar" parameterType="int">
+		UPDATE calendar SET cal_delyn  = 'y'
+		WHERE cal_no = #{cal_no}
+	</update>
+</mapper>

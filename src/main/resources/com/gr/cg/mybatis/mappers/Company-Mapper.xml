@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Company-Mapper">
+    <select id="selectCompanySeqNextValue" resultType="int" >
+		SELECT company_seq.NEXTVAL FROM dual    
+    </select>
+	<select id="selectCompanyList" resultType="Company">
+		SELECT *
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+		        FROM(SELECT
+		                comp_no,
+		                comp_addr,
+		                comp_nm,
+		                comp_hp,
+		                comp_actvyn,
+		                comp_crno,
+		                comp_regymd,
+		                comp_logo,
+		                comp_seal,
+		                comp_delgnm,
+		                comp_regid,
+		                comp_udtid,
+		                comp_udtymd
+		             FROM company) A
+		        WHERE comp_no IS NOT NULL <include refid="include.search2"/>
+		        ORDER BY ${orderby} ${asc}) 
+		WHERE RNUM  &gt; #{start} AND RNUM &lt;= #{end}
+	</select>
+	
+	<select id="selectCompany" resultType="Company">
+		SELECT
+		    comp_no,
+		    comp_addr,
+		    comp_nm,
+		    comp_hp,
+		    comp_actvyn,
+		    comp_crno,
+		    comp_regymd,
+		    comp_logo,
+		    comp_seal,
+		    comp_delgnm,
+		    comp_regid,
+		    comp_udtid,
+		    comp_udtymd
+		FROM
+		    company
+		WHERE 
+			comp_no = #{comp_no}
+	</select>
+	
+	<update id="insertCompany" parameterType="Company">
+		
+		INSERT INTO company (
+		    comp_no,
+		    comp_addr,
+		    comp_nm,
+		    comp_hp,
+		    comp_actvyn,
+		    comp_crno,
+		    comp_regymd,
+		    comp_logo, 
+		    comp_seal,
+		    comp_delgnm,
+		    comp_regid
+		) VALUES (
+		    #{comp_no},
+		    #{comp_addr},
+		    #{comp_nm},
+		    #{comp_hp},
+		    'Y',
+		    #{comp_crno},
+		    SYSDATE,
+		    #{comp_logo},
+		    #{comp_seal},
+		    #{comp_delgnm},
+		    #{comp_regid}
+		)
+		
+	</update>
+	
+	<update id="updateCompany" parameterType="Company">
+		UPDATE company
+	    SET
+	        comp_addr   =    #{comp_addr      },
+	        comp_nm     =  #{comp_nm        },
+	        comp_hp     =  #{comp_hp        },
+	        comp_crno   =    #{comp_crno      },
+	        <if test='comp_logo != null and !comp_logo.equals("")'>
+   				 comp_logo   =    #{comp_logo      },
+			</if>
+	       
+	        <if test='comp_seal != null and !comp_seal.equals("")'>
+   				 comp_seal   =    #{comp_seal      },
+			</if>
+	        comp_delgnm =      #{comp_delgnm    },
+	        comp_udtid  =     #{comp_udtid     },
+	        comp_udtymd =      SYSDATE
+	        
+		WHERE
+		    comp_no = #{comp_no      }
+	</update>
+	
+	<update id="updateActvN" parameterType="int">
+		UPDATE company
+	    SET comp_actvyn = 'N'
+	    WHERE comp_no  = #{comp_no}
+	</update>
+	
+	
+	
+</mapper>

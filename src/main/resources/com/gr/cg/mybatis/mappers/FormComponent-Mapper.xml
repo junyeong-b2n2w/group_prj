@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="FormComponent-Mapper">
+	
+	<select id="selectFormComponentByFCAFNO" resultType="formComponent">
+		
+		select * from FORMCOMPONENT
+
+		where FC_AFNO=#{fc_afno}
+		order by FC_ORD
+		
+	</select>
+	
+	<update id="deleteFormComponentByFCAFNO">
+		
+		delete from FORMCOMPONENT
+		where FC_AFNO =#{fc_afno}
+		
+	</update>
+
+	<update id="insertFormComponent"> 
+		
+		insert into FORMCOMPONENT 
+		values (ApprovalForm_seq.currval,#{fc_no},#{fc_ord})
+		
+	</update>
+
+
+	<update id="insertFormComponentByAFNO"> 
+		
+		insert into FORMCOMPONENT 
+		values (#{fc_afno},#{fc_no},#{fc_ord})
+		
+	</update>
+	
+</mapper>

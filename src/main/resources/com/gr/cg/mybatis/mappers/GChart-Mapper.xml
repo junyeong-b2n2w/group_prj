@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="GChart-Mapper">
+	<sql id="search">
+	
+	<if test="keyword != null and !keyword.equals('')">
+		 AND EMP_NM LIKE '%' || #{keyword} || '%' 
+	</if>
+	</sql>
+	
+	<!-- 회사별 부서 전체 불러오기 -->
+	<select id="selectDeptList" resultType="gChart" parameterType="int">
+		SELECT DEPT_NO,DEPT_NM,DEPT_UPDEPT FROM DEPARTMENT  WHERE DEPT_ACTVYN = 'Y' AND DEPT_COMPNO = #{compno}
+	</select>
+	
+	<select id="selectEmpListByDeptNo" resultType="gChart" parameterType="int">
+	
+			SELECT *
+			FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+			        FROM(
+		              
+		              
+					SELECT E.EMP_ID,E.EMP_NM,E.RANK_NO,E.RANK_NM, E.EMP_DEPTNO,E.EMP_ACTVYN ,D.DEPT_NM FROM DEPARTMENT D,
+					(SELECT R.*,E.EMP_ID,E.EMP_NM,E.EMP_DEPTNO,E.EMP_ACTVYN FROM EMPLOYEE E,
+						 (SELECT RANK_NO,RANK_UPRANK,RANK_NM,RANK_COMPNO,LEVEL AS RLEVEL
+						        FROM RANK
+						        START WITH RANK_UPRANK IS NULL
+						        CONNECT BY PRIOR RANK_NO = RANK_UPRANK)R
+						WHERE E.EMP_RANKNO = R.RANK_NO
+					ORDER BY RLEVEL)E
+				WHERE D.DEPT_NO = E.EMP_DEPTNO AND DEPT_ACTVYN = 'Y' AND D.DEPT_COMPNO = #{compno}  AND E.EMP_ACTVYN = 'Y' 
+					<if test="searchno != null">AND  D.DEPT_NO = #{searchno}</if>
+		              
+		              
+			       ) A  WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>) 
+			WHERE RNUM  &gt; #{start} AND RNUM &lt;= #{end}
+	</select>
+	<select id="chartEmpListByDeptNo" resultType="gChart" parameterType="int">
+		SELECT E.EMP_ID,E.EMP_NM,E.RANK_NO,E.RANK_NM, E.EMP_DEPTNO ,D.DEPT_NM FROM DEPARTMENT D,
+					(SELECT R.*,E.EMP_ID,E.EMP_NM,E.EMP_DEPTNO,E.EMP_ACTVYN FROM EMPLOYEE E,
+						 (SELECT RANK_NO,RANK_UPRANK,RANK_NM,RANK_COMPNO,LEVEL AS RLEVEL
+						        FROM RANK
+						        START WITH RANK_UPRANK IS NULL
+						        CONNECT BY PRIOR RANK_NO = RANK_UPRANK)R
+						WHERE E.EMP_RANKNO = R.RANK_NO
+					ORDER BY RLEVEL)E
+				WHERE D.DEPT_NO = E.EMP_DEPTNO AND DEPT_ACTVYN = 'Y' AND E.EMP_DEPTNO = #{data} AND E.EMP_ACTVYN = 'Y'
+	</select>
+
+	<select id="selectEmpListByDeptNoForAprvLn" resultType="gChart" parameterType="int">
+			SELECT E.EMP_ID,E.EMP_NM,E.RANK_NO,E.RANK_NM, E.EMP_DEPTNO ,D.DEPT_NM FROM DEPARTMENT D,
+			(SELECT R.*,E.EMP_ID,E.EMP_NM,E.EMP_DEPTNO,E.EMP_ACTVYN FROM EMPLOYEE E,
+				 (SELECT RANK_NO,RANK_UPRANK,RANK_NM,RANK_COMPNO,LEVEL AS RLEVEL
+				        FROM RANK
+				        START WITH RANK_UPRANK IS NULL
+				        CONNECT BY PRIOR RANK_NO = RANK_UPRANK)R
+				WHERE E.EMP_RANKNO = R.RANK_NO
+			ORDER BY RLEVEL)E
+		WHERE D.DEPT_NO = E.EMP_DEPTNO AND E.EMP_DEPTNO = #{dept_no} AND DEPT_ACTVYN = 'Y' AND E.EMP_ACTVYN = 'Y'
+		
+	</select>
+
+	<select id="selectEmpListBySearchCri" resultType="gChart">
+			SELECT E.EMP_ID,E.EMP_NM EMP_NM,E.RANK_NO,E.RANK_NM, E.EMP_DEPTNO ,D.DEPT_NM,E.EMP_COMPNO, RLEVEL FROM DEPARTMENT D,
+			(SELECT R.*,E.EMP_ID,E.EMP_NM,E.EMP_DEPTNO,E.EMP_COMPNO,E.EMP_ACTVYN FROM EMPLOYEE E,
+				 (SELECT RANK_NO,RANK_UPRANK,RANK_NM,RANK_COMPNO,LEVEL AS RLEVEL
+				        FROM RANK
+				        START WITH RANK_UPRANK IS NULL
+				        CONNECT BY PRIOR RANK_NO = RANK_UPRANK)R
+				WHERE E.EMP_RANKNO = R.RANK_NO
+			ORDER BY RLEVEL)E
+		WHERE D.DEPT_NO = E.EMP_DEPTNO AND E.EMP_COMPNO =#{comp_no} AND E.EMP_ACTVYN = 'Y' <include refid="search"/>
+		
+	</select>
+	
+	<select id="selectEmpListCountBySearchCri" resultType="int">
+	
+		SELECT COUNT(*) FROM EMPLOYEE WHERE EMP_COMPNO = #{comp_no} AND EMP_ACTVYN = 'Y'<include refid="search"/>
+	
+	</select>
+	
+	
+</mapper>

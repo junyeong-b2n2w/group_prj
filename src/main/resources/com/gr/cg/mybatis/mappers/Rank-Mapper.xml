@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Rank-Mapper">
+	
+	
+	<!-- 회사별 직급 전체 불러오기 -->
+	<select id="selectRankList" resultType="rank">
+		SELECT A.RANK_NO,A.RANK_NM,A.RANK_UPRANK,
+				(SELECT B.RANK_NM RANK_UPNM FROM RANK B WHERE B.RANK_NO = A.RANK_UPRANK) RANK_UPNM, RANK_COMPNO
+		FROM RANK A
+		WHERE RANK_COMPNO = #{comp_no}
+		START WITH RANK_UPRANK IS NULL
+		CONNECT BY PRIOR RANK_NO = RANK_UPRANK
+	</select>
+	
+	<!-- 회사별 직급 개수 가져오기 -->
+	<select id="getRankCount" resultType="int">
+		SELECT COUNT(*)  
+		FROM  RANK
+		WHERE RANK_COMPNO =#{comp_no}
+	</select>
+	
+	<select id="selectRankByRankNo" parameterType="int" resultType="rank">
+	
+		SELECT * FROM RANK WHERE RANK_NO = #{rank_no}
+	</select>
+	<!-- 직급 입력 -->
+	<update id="registRank" parameterType="rank">
+		INSERT INTO RANK
+			(RANK_NO,RANK_NM,RANK_UPRANK,RANK_COMPNO, RANK_REGID, RANK_REGYMD)
+		VALUES
+		(#{rank_no},#{rank_nm},#{rank_uprank},#{rank_compno}, #{rank_regid}, SYSDATE)
+	</update>
+	
+	<update id="registSuperRank" parameterType="rank">
+		INSERT INTO RANK
+			(RANK_NO,RANK_NM,RANK_COMPNO, RANK_REGID, RANK_REGYMD)
+		VALUES
+		(#{rank_no},#{rank_nm},#{rank_compno}, #{rank_regid}, SYSDATE)
+	</update>
+	
+	
+	<!-- 직급수정 -->
+	<update id="modifyRank" parameterType="rank">
+		UPDATE RANK SET 
+			RANK_NM=#{rank_nm},RANK_UPRANK=#{rank_uprank}
+		WHERE RANK_NO= #{rank_no}
+	</update>
+
+	
+	<!-- 직급 삭제-->
+	<update id="removeRank" parameterType="rank">
+		DELETE FROM RANK WHERE RANK_NO = #{rank_no}
+	</update>
+
+	<select id="selectRankSeq" resultType="int">
+		SELECT RANK_SEQ.NEXTVAL FROM DUAL
+	</select>
+	</mapper>

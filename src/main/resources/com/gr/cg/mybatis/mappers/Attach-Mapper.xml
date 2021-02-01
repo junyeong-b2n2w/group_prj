@@ -1,0 +1,105 @@
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Attach-Mapper">
+	
+	
+	<select id="selectTempFile" resultType="com.gr.cg.dto.TempAttcVO" parameterType="com.gr.cg.dto.TempAttcVO">
+		select *
+		from tempattachments
+		where ta_no = #{ta_no}
+	</select>
+	
+	<update id="insertFile" parameterType="attach">
+		INSERT INTO attachments (
+		    attc_no,
+		    attc_key,
+		    attc_writer,
+		    attc_nm,
+		    attc_extnm,
+		    attc_route,
+		    attc_extn,
+		    attc_sz,
+		    attc_regdt,
+		    attc_deletyn
+		) VALUES (
+		    realfile_seq.nextVal,
+		    #{attc_key},
+		    #{attc_writer},
+		    #{attc_nm},
+		    #{attc_extnm},
+		    #{attc_route},
+		    #{attc_extn},
+		    #{attc_sz},
+		    sysdate,
+		    #{attc_deletyn}
+		)
+	</update>
+	
+	<update id="insertTempFile" parameterType="com.gr.cg.dto.TempAttcVO">
+		INSERT INTO tempattachments VALUES(#{ta_no},#{ta_writer},#{ta_nm},#{ta_extnm},#{ta_route},#{ta_extn},#{ta_sz},sysdate)
+	</update>
+	
+	<update id="insertKey" parameterType="com.gr.cg.dto.AttachKeyVO">
+		INSERT INTO attachmentskey (
+		    ak,
+		    ak_writer,
+		    ak_regdt,
+		    ak_usetable,
+		    ak_useyn
+		) VALUES (
+		    #{ak},
+		    #{ak_writer},
+		    sysdate,
+		    #{ak_usetable},
+		    #{ak_useyn}
+		)
+	</update>
+	
+	<select id="selectTempSequenceNextValue" resultType="int">
+		SELECT temp_seq.nextVal
+		FROM dual
+	</select>
+	
+	<select id="selectRealSequenceNextValue" resultType="int">
+		SELECT realfile_seq.nextVal
+		FROM dual
+	</select>
+	
+	<select id="selectOneInfo" parameterType="int" resultType="attach" >
+		SELECT a.*
+		FROM attachments a, attachmentskey b
+		where a.attc_key = b.ak
+		and attc_no = #{attc_no}
+	</select>
+	
+	<update id="deleteFile" parameterType="com.gr.cg.dto.AttachVO">
+		UPDATE attachments
+		SET attc_deletyn = 'Y'
+		WHERE attc_no = #{attc_no}
+	</update>
+	
+	<update id="deleteKey" parameterType="str">
+		UPDATE attachmentskey
+    	SET ak_useyn = 'N'
+		WHERE ak = #{ak}
+	</update>
+	
+	<select id="selectAkNoListByKey" parameterType="str" resultType="int">
+		SELECT * FROM ATTACHMENT WHERE ATTC_KEY =#{ak}
+	</select>
+	
+	<update id="updateKey" parameterType="java.util.Map" >
+	
+		UPDATE ATTACHMENTS SET ATTC_KEY =#{attc_key} WHERE ATTC_KEY = #{before_key}
+	</update>
+	
+	<select id="selectCmpnm" parameterType="str" resultType="str">
+		select comp_nm
+		from EMPLOYEE a, COMPANY b
+		where b.COMP_NO = a.EMP_COMPNO
+		and a.emp_id = #{empid}
+	</select>
+	
+	
+</mapper>

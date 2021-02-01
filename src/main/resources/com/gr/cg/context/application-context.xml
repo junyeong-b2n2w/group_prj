@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:c="http://www.springframework.org/schema/c" xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="logoUploadPath" class="java.lang.String">
+		<constructor-arg value="${logo.upload}" />
+	</bean>
+	<bean id="aprvUploadPath" class="java.lang.String">
+		<constructor-arg value="${aprv.upload}" />
+	</bean>
+	<bean id="docuUploadPath" class="java.lang.String">
+		<constructor-arg value="${docu.upload}" />
+	</bean>
+	<bean id="boardUploadPath" class="java.lang.String">
+		<constructor-arg value="${board.upload}" />
+	</bean>
+	<bean id="pictureUploadPath" class="java.lang.String">
+		<constructor-arg value="${picture.upload}" />
+	</bean>
+	<bean id="etcUploadPath" class="java.lang.String">
+		<constructor-arg value="${etc.upload}" />
+	</bean>
+	<bean id="tempUploadPath" class="java.lang.String">
+		<constructor-arg value="${temp.upload}" />
+	</bean>
+	<bean id="summernoteUploadPath" class="java.lang.String">
+		<constructor-arg value="${summernote.upload}" />
+	</bean>
+	<bean id="imgUploadPath" class="java.lang.String">
+		<constructor-arg value="${img.upload}" />
+	</bean>
+	<bean id="bdocUploadPath" class="java.lang.String">
+		<constructor-arg value="${bdoc.upload}" />
+	</bean>
+	<bean id="sealUploadPath" class="java.lang.String">
+		<constructor-arg value="${seal.upload}" />
+	</bean>
+	<bean id="empDAO" class="com.gr.cg.dao.EmpDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="empService" class="com.gr.cg.service.EmpServiceImpl" p:empDAO-ref="empDAO" p:deptService-ref="deptService" p:rankService-ref="rankService" />
+	<bean id="menuDAO" class="com.gr.cg.dao.MenuDAOImpl" p:sqlSessionFactory-ref="sqlSession" />
+	<bean id="menuService" class="com.gr.cg.service.MenuServiceImpl" p:menuDAO-ref="menuDAO" />
+	<bean id="approvalFormDAO" class="com.gr.cg.dao.ApprovalFormDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="approvalFormService" class="com.gr.cg.service.ApprovalFormServiceImpl" p:approvalFormDAO-ref="approvalFormDAO" p:formComponentDAO-ref="formComponentDAO" />
+	<bean id="componentDAO" class="com.gr.cg.dao.ComponentDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="componentService" class="com.gr.cg.service.ComponentServiceImpl" p:componentDAO-ref="componentDAO" />
+	<bean id="formComponentDAO" class="com.gr.cg.dao.FormComponentDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="formComponentService" class="com.gr.cg.service.FormComponentServiceImpl" p:formComponentDAO-ref="formComponentDAO" />
+	<bean id="gChartDAO" class="com.gr.cg.dao.GChartDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="gChartService" class="com.gr.cg.service.GChartServiceImpl" p:gChartDAO-ref="gChartDAO" />
+	<bean id="approvalDAO" class="com.gr.cg.dao.ApprovalDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="approvalService" class="com.gr.cg.service.ApprovalServiceImpl" p:approvalDAO-ref="approvalDAO" p:aprvConsDAO-ref="aprvConsDAO" p:elecDocumentDAO-ref="elecDocumentDAO"/>
+	<bean id="widgetDAO" class="com.gr.cg.dao.WidgetDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="widgetService" class="com.gr.cg.service.WidgetServiceImpl" p:widgetDAO-ref="widgetDAO" />
+	<bean id="widgetOrderDAO" class="com.gr.cg.dao.WidgetOrderDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="widgetOrderService" class="com.gr.cg.service.WidgetOrderServiceImpl" p:widgetOrderDAO-ref="widgetOrderDAO" p:widgetDAO-ref="widgetDAO" />
+	<bean id="boardDAO" class="com.gr.cg.dao.BoardDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="boardService" class="com.gr.cg.service.BoardServiceImpl" p:boardDAO-ref="boardDAO" />
+	<bean id="bdocDAO" class="com.gr.cg.dao.BdocDAOIml" p:sqlSession-ref="sqlSession" />
+	<bean id="bdocService" class="com.gr.cg.service.BdocSErviceImpl" p:bdocDAO-ref="bdocDAO" p:fileService-ref="fileService" p:fileDAO-ref="fileDAO" />
+	<bean id="fileDAO" class="com.gr.cg.dao.FileDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="fileService" class="com.gr.cg.service.FileServiceImpl" p:fileDAO-ref="fileDAO" />
+	<bean id="mandateDAO" class="com.gr.cg.dao.MandateDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="mandateService" class="com.gr.cg.service.MandateServiceImpl" p:mandateDAO-ref="mandateDAO" />
+	<bean id="postDAO" class="com.gr.cg.dao.PostDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="postService" class="com.gr.cg.service.PostServiceImpl" p:postDAO-ref="postDAO" p:fileService-ref="fileService" p:fileDAO-ref="fileDAO" />
+	<bean id="deptDAO" class="com.gr.cg.dao.DeptDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="deptService" class="com.gr.cg.service.DeptServiceImpl" p:deptDAO-ref="deptDAO" />
+	<bean id="rankDAO" class="com.gr.cg.dao.RankDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="rankService" class="com.gr.cg.service.RankServiceImpl" p:rankDAO-ref="rankDAO" />
+	<bean id="noticeDAO" class="com.gr.cg.dao.NoticeDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="noticeService" class="com.gr.cg.service.NoticeServiceImpl" p:noticeDAO-ref="noticeDAO" p:fileService-ref="fileService" p:notificationDAO-ref="notificationDAO"/>
+	<bean id="calendarDAO" class="com.gr.cg.dao.CalendarDAOImpl" p:sqlSession-ref="sqlSession"/>
+	<bean id="calendarService" class="com.gr.cg.service.CalendarServiceImpl" p:calendarDAO-ref="calendarDAO" />
+	<bean id="replyDAO" class="com.gr.cg.dao.ReplyDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="replyService" class="com.gr.cg.service.ReplyServiceImpl" p:replyDAO-ref="replyDAO" />
+	<bean id="elecDocumentDAO" class="com.gr.cg.dao.ElecDocumentDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="elecDocumentService" class="com.gr.cg.service.ElecDocumentServiceImpl" p:elecDocumentDAO-ref="elecDocumentDAO" 
+	p:recRefDAO-ref="recRefDAO" p:elecAprvConsDAO-ref="aprvConsDAO" p:fileService-ref="fileService"
+	p:sqlSession-ref="sqlSession" p:approvalFormService-ref="approvalFormService" 
+	p:commonCodeService-ref="commonCodeService" p:componentService-ref="componentService" 
+	p:companyService-ref="companyService" p:elecDocumentService-ref="elecDocumentService"/>
+	<bean id="recRefDAO" class="com.gr.cg.dao.RecRefDAOImpl" p:sqlSession-ref="sqlSession"/>
+	<bean id="aprvConsDAO" class="com.gr.cg.dao.AprvConsDAOImpl" p:sqlSession-ref="sqlSession"/>
+	<bean id="companyDAO" class="com.gr.cg.dao.CompanyDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="companyService" class="com.gr.cg.service.CompanyServiceImpl" p:companyDAO-ref="companyDAO" p:deptDAO-ref="deptDAO" p:rankDAO-ref="rankDAO" p:empDAO-ref="empDAO"/>
+	<bean id="vacationDAO" class="com.gr.cg.dao.VacationDAOImpl" p:sqlSession-ref="sqlSession"/>
+	<bean id="vacationService" class="com.gr.cg.service.VacationServiceImpl" p:vacationDAO-ref="vacationDAO" p:approvalService-ref="approvalService"/>
+	<bean id="taskDAO" class="com.gr.cg.dao.TaskDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="taskService" class="com.gr.cg.service.TaskServiceImpl" p:taskDAO-ref="taskDAO"  p:performerService-ref="performerService" p:performerDAO-ref="performerDAO" p:fileService-ref="fileService"/>
+	<beans:bean xmlns:beans="http://www.springframework.org/schema/beans" id="performerDAO" class="com.gr.cg.dao.PerformerDAOImpl" p:sqlSession-ref="sqlSession" />
+	<beans:bean xmlns:beans="http://www.springframework.org/schema/beans" id="performerService" class="com.gr.cg.service.PerformerServiceImpl" p:performerDAO-ref="performerDAO" p:fileService-ref="fileService"/>
+
+
+	<bean id="shortCutDao" class="com.gr.cg.dao.ShortCutDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="shortCutService" class="com.gr.cg.service.ShortCutServiceImpl" p:shortCutDAO-ref="shortCutDao"/>
+	
+	
+	<bean id="attendanceDAO" class="com.gr.cg.dao.AttendanceDAOImpl" p:sqlSession-ref="sqlSession"/>
+	<bean id="attendanceService" class="com.gr.cg.service.AttendanceServiceImpl" p:attendenceDAO-ref="attendanceDAO"/>
+	
+	<bean id="roleMainDAO" class="com.gr.cg.dao.RoleMainDAOImpl" p:sqlSession-ref="sqlSession"/>
+	<bean id="roleMainService" class="com.gr.cg.service.RoleMainServiceImpl" p:roleMainDAO-ref="roleMainDAO" p:attendanceService-ref="attendanceService"/>
+	
+	<bean id="commonCodeDAO" class="com.gr.cg.dao.CommonCodeDAOImpl" p:sqlSession-ref="sqlSession"/>
+	<bean id="commonCodeService" class="com.gr.cg.service.CommonCodeServiceImpl" p:commonCodeDAO-ref="commonCodeDAO" />
+
+	<bean id="notificationDAO" class="com.gr.cg.dao.NotificationDAOImpl" p:sqlSession-ref="sqlSession"/>
+	<bean id="notificationService" class="com.gr.cg.service.NotificationServiceImpl" p:notificationDAO-ref="notificationDAO"/>
+
+	<beans:bean xmlns:beans="http://www.springframework.org/schema/beans" id="englishDAO" class="com.gr.cg.dao.EnglishDAOImpl" p:sqlSession-ref="sqlSession" />
+	<beans:bean xmlns:beans="http://www.springframework.org/schema/beans" id="englishService" class="com.gr.cg.service.EnglishServiceImpl" p:englishDAO-ref="englishDAO" />
+
+
+
+</beans>
+

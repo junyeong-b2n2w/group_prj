@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Dept-Mapper">
+	
+	<sql id="search">
+		<if test="keyword != null and !keyword.equals('')">
+				 AND A.DEPT_NM like '%' || #{keyword} || '%'	
+		</if>
+	</sql>
+	
+	
+	<!-- 회사별 부서 전체 불러오기 -->
+	<select id="selectDeptList" resultType="dept">
+		SELECT A.DEPT_NO,A.DEPT_COMPNO,A.DEPT_NM,A.DEPT_LOC,A.DEPT_UPDEPT,B.DEPT_NM DEPT_UPNM,A.DEPT_REGYMD,A.DEPT_PH,A.DEPT_ACTVYN
+	    FROM DEPARTMENT A , DEPARTMENT B
+	    WHERE A.DEPT_NO IS NOT NULL AND A.DEPT_COMPNO = #{comp_no} AND A.DEPT_UPDEPT = B.DEPT_NO <include refid="search"/>
+	    ORDER BY A.DEPT_REGYMD DESC
+	</select>
+	
+	<!-- 회사별 부서 개수 가져오기 -->
+	<select id="getDeptCount" resultType="int">
+		SELECT COUNT(*)
+	    FROM DEPARTMENT A , DEPARTMENT B
+	    WHERE A.DEPT_NO IS NOT NULL AND A.DEPT_COMPNO = #{comp_no} AND A.DEPT_UPDEPT = B.DEPT_NO <include refid="search"/>
+	</select>
+	
+	<!-- 회사별 부서 전체 불러오기 (맨 상위 포함 )-->
+	<select id="selectAllDeptList" resultType="dept">
+		    SELECT DEPT_NO,DEPT_COMPNO,DEPT_NM,DEPT_LOC,DEPT_UPDEPT,DEPT_REGYMD,DEPT_PH,DEPT_ACTVYN
+		    FROM DEPARTMENT
+	        WHERE DEPT_COMPNO = #{comp_no}
+	        START WITH DEPT_UPDEPT IS NULL
+	        CONNECT BY PRIOR DEPT_NO = DEPT_UPDEPT
+	        ORDER SIBLINGS BY DEPT_UPDEPT ASC, DEPT_NO ASC 
+	</select>
+	
+	<!-- 부서 선택하여 가져오기 -->
+	<select id="selectDeptByDeptNo" resultType="dept" parameterType="int">
+		SELECT
+			DEPT_NO,DEPT_COMPNO,DEPT_NM,DEPT_LOC,DEPT_UPDEPT,DEPT_REGYMD,DEPT_UDTYMD,DEPT_PH,DEPT_ACTVYN
+		FROM DEPARTMENT
+		WHERE DEPT_NO = #{dept_no}
+	</select>
+
+	<!-- 부서 입력 -->
+	<update id="registDepartment" parameterType="dept">
+		INSERT INTO DEPARTMENT
+			(DEPT_NO,DEPT_COMPNO,DEPT_NM,DEPT_LOC,DEPT_UPDEPT,DEPT_REGYMD,DEPT_PH,DEPT_ACTVYN)
+		VALUES
+		(#{dept_no},#{dept_compno},
+			#{dept_nm},NVL(#{dept_loc, jdbcType=VARCHAR},null),
+			NVL(#{dept_updept, jdbcType=INTEGER},null),SYSDATE,
+			#{dept_ph},NVL(#{dept_actvyn, jdbcType=VARCHAR},'N')
+		)
+	</update>
+	<!-- 부서수정(부서명, 부서위치, 수정일정, 전화번호, 활성여부) -->
+	<update id="modifyDepartment" parameterType="dept">
+	UPDATE DEPARTMENT SET 
+		DEPT_NM= #{dept_nm},DEPT_LOC=#{dept_loc},DEPT_UPDEPT=#{dept_updept},
+		DEPT_UDTYMD=SYSDATE,DEPT_PH=#{dept_ph},DEPT_ACTVYN=#{dept_actvyn}
+   		 WHERE DEPT_NO = #{dept_no}
+	</update>
+
+	
+	<!-- 부서 삭제 (비활성화)-->
+	<update id="ModifyDeptActvYn" parameterType="dept">
+		UPDATE DEPARTMENT SET DEPT_ACTVYN =#{dept_actvyn} WHERE  DEPT_NO = #{dept_no}
+	</update>
+
+	<!-- 해당 부서의 상위부서만 가져오기 -->
+	<select id="selectDeptListByDeptUpNo" resultType="dept" parameterType="dept">
+	   SELECT ROWNUM,A.* FROM
+		   (SELECT DEPT_NO, DEPT_NM, DEPT_UPDEPT
+		   FROM DEPARTMENT
+		   WHERE DEPT_UPDEPT IS NOT NULL AND DEPT_NO != #{dept_no} DEPT_COMPNO =#{comp_no}
+		   START WITH DEPT_NO = #{dept_no}
+		   CONNECT BY PRIOR DEPT_UPDEPT = DEPT_NO) A
+		   ORDER BY ROWNUM
+	</select>
+	<!-- 해당 부서를 제외한 모든 부서 가져오기 -->
+	<select id="selectDeptListExceptMyDeptNo" resultType="dept" parameterType="dept">
+			select dept_no, dept_nm, dept_updept
+		   	from department
+		   	where dept_updept is not null and dept_no != #{dept_no} and dept_compno = #{dept_compno}
+	
+	</select>
+
+	
+	<select id="selectDeptSeq" resultType="int">
+		SELECT DEPT_SEQ.NEXTVAL FROM DUAL
+	</select>
+
+	<update id="insertTopDept" parameterType="dept">
+		INSERT INTO department (
+		    dept_no,
+		    dept_compno,
+		    dept_nm,
+		    dept_loc,
+		    dept_regymd,
+		    dept_ph,
+		    dept_actvyn
+		) VALUES (
+		    #{dept_no},
+		    #{dept_compno},
+		    #{dept_nm},
+		    #{dept_loc},
+		    SYSDATE,
+		    #{dept_ph},
+		    'Y'
+		)
+	</update>
+	
+	<select id="getAllEmpListByCompNo" resultType="empCom">
+		
+			SELECT *
+			FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+			        FROM(	SELECT EMP_ID,EMP_NM,EMP_COMPNO, 
+							        EMP_RANKNO, (SELECT RANK_NM FROM RANK WHERE RANK_NO = EMP_RANKNO) EMP_RANKNM, 
+									EMP_DEPTNO, (SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = EMP_DEPTNO ) EMP_DEPTNM
+							FROM EMPLOYEE WHERE EMP_COMPNO =#{compno} AND EMP_ACTVYN = 'Y' AND  EMP_ID NOT IN (SELECT DEPTHD_EMPID FROM DEPARTMENTHEAD)
+							ORDER BY ${orderby} ${asc}
+				)A  
+					WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>
+				)
+			WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+	
+	</select>
+	<update id="insertdepartmentHead" parameterType="empCom">
+		INSERT INTO DEPARTMENTHEAD ( DEPTHD_DEPTNO, DEPTHD_EMPID) VALUES (#{emp_deptno},#{emp_headid})
+	</update>
+	
+	<update id="updatedepartmentHead" parameterType="dHead">
+	
+		UPDATE DEPARTMENTHEAD SET DEPTHD_EMPID = #{depthd_empid} WHERE DEPTHD_DEPTNO = #{depthd_deptno}
+	</update>
+	
+	<select id="getDeptHeadByDeptNo" parameterType="int" resultType="dHead">
+		SELECT DEPTHD_EMPID,DEPTHD_DEPTNO,(SELECT EMP_NM FROM EMPLOYEE WHERE EMP_ID = DEPTHD_EMPID) DEPTHD_EMPNM FROM DEPARTMENTHEAD WHERE  DEPTHD_DEPTNO =#{dept_no}
+	</select>
+	
+	
+	<update id="updateEmpDeptNO" parameterType="dHead">
+		UPDATE EMPLOYEE SET EMP_DEPTNO = #{depthd_deptno} WHERE EMP_ID = #{depthd_empid}
+	</update>
+</mapper>
+  

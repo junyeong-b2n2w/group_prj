@@ -1,0 +1,264 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Attendance-Mapper">
+	
+	<select id="selectMyAttendence" resultType="attdCom">
+		SELECT *
+			FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+			        FROM(
+					          SELECT ATTD_NO, ATTD_EMPID,
+						       	ATTD_GTWTIME, TO_CHAR(ATTD_GTWTIME,'YYYY-MM-DD')ATTD_GTWYMD,TO_CHAR(ATTD_GTWTIME,'HH24:MI:SS') ATTD_GTWHMS,
+								ATTD_OFFWTIME,TO_CHAR(ATTD_OFFWTIME,'YYYY-MM-DD')ATTD_OFFWYMD,TO_CHAR(ATTD_OFFWTIME,'HH24:MI:SS') ATTD_OFFHMS,
+								TRUNC((TO_DATE( TO_CHAR(ATTD_OFFWTIME, 'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS')-TO_DATE( TO_CHAR(ATTD_GTWTIME, 'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS'))*24) ||':'||
+								TRUNC(MOD((TO_DATE( TO_CHAR(ATTD_OFFWTIME, 'YYYYMMDDHH24MISS') ,'YYYYMMDDHH24MISS') - TO_DATE(TO_CHAR(ATTD_GTWTIME, 'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS'))*24,1)*60) ||':'||
+								TRUNC(ROUND(MOD((TO_DATE( TO_CHAR(ATTD_OFFWTIME, 'YYYYMMDDHH24MISS') , 'YYYYMMDDHH24MISS') - TO_DATE(TO_CHAR(ATTD_GTWTIME, 'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS'))*24*60,1)*60))
+								AS TOTALTIME,
+									CASE
+										TO_CHAR(ATTD_OFFWTIME,'D')
+											WHEN '1' THEN '일요일'
+											WHEN '2' THEN '월요일'
+											WHEN
+											'3' THEN '화요일'
+											WHEN '4' THEN '수요일'
+											WHEN '5' THEN '목요일'
+											WHEN '6' THEN '금요일'
+											WHEN '7' THEN '토요일'
+									END DAYNM,ATTD_WORKSHAPE
+							
+								FROM ATTENDANCE
+								WHERE ATTD_EMPID = #{searchno} AND ATTD_WORKSHAPE != 'GAT07'
+								ORDER BY ${orderby} ${asc}
+				)A  
+				WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>
+				)
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+	</select>
+	<select id="selectNotSearchAttendListByAttdId" parameterType="attend" resultType="attend">
+	
+		SELECT * FROM ATTENDANCE WHERE ATTD_EMPID = #{attd_empid}
+	</select>
+	<!-- 출근인증 -->
+	<update id="insertMyAttendence" parameterType="attend">
+		 INSERT INTO ATTENDANCE (
+				    ATTD_NO,ATTD_EMPID,ATTD_GTWTIME, ATTD_OFFWTIME,ATTD_WORKSHAPE) 
+	    VALUES (
+				    #{attd_no},#{attd_empid},SYSDATE, #{attd_offwtime,jdbcType=VARCHAR},'GAT03'
+				)
+	</update>
+	
+	<!-- 퇴근인증 -->
+	<update id="updateMyOffWork" parameterType="attend">
+			UPDATE ATTENDANCE SET ATTD_OFFWTIME = SYSDATE , ATTD_WORKSHAPE = 'GAT01' WHERE ATTD_NO =#{attd_no}
+	</update>
+	
+	<!-- 근무형태 수정 -->
+	<update id="updateAttd_workshape" parameterType="attend">
+			UPDATE ATTENDANCE SET ATTD_WORKSHAPE = #{attd_workshape} WHERE ATTD_NO =#{attd_no}
+	</update>
+	
+	<!-- 승인대기전 사용자 출퇴근 수정 -->
+	<update id="updateMyAttendence" parameterType="attend">
+			UPDATE ATTENDANCE SET ATTD_GTWTIME = TO_DATE(#{attd_gtwtime}, 'YYYY-MM-DD HH24:MI:SS'), ATTD_OFFWTIME = TO_DATE(#{attd_offwtime}, 'YYYY-MM-DD HH24:MI:SS') , ATTD_WORKSHAPE = #{attd_workshape} WHERE ATTD_NO =#{attd_no}
+	</update>
+	
+	
+	<select id="selectAttendenceSeq" resultType="int">
+		SELECT ATTENDANCE_SEQ.NEXTVAL FROM DUAL
+	</select>
+	<select id="selectEmpInfoByEmpID" resultType="java.util.Map" parameterType="str">
+		SELECT EMP_ID,EMP_NM,EMP_COMPNO,
+				EMP_RANKNO,
+				(SELECT RANK_NM FROM RANK WHERE RANK_NO = EMP_RANKNO) EMP_RANKNM,
+				EMP_DEPTNO,
+				(SELECT DEPT_NM FROM DEPARTMENT WHERE DEPT_NO = EMP_DEPTNO ) EMP_DEPTNM,
+				EMP_JNCMPYMD 
+		FROM EMPLOYEE WHERE EMP_ID =#{emp_id}
+	
+	</select>
+	
+	<!-- 개인으; 일별 출근시간 퇴근시간 총 근로 시간을 구한다 (현재날짜 기준 주로 계산)-->
+	
+	<select id="selectAttendanceListByDayAndAttdId" resultType="java.util.Map">
+	<![CDATA[
+				 SELECT ATTD_NO, ATTD_EMPID,
+						       	TO_CHAR(ATTD_GTWTIME,'YYYY-MM-DD')ATTD_GTWYMD,TO_CHAR(ATTD_GTWTIME,'HH24:MI:SS') ATTD_GTWHMS,
+								ATTD_OFFWTIME,TO_CHAR(ATTD_OFFWTIME,'YYYY-MM-DD')ATTD_OFFWYMD,TO_CHAR(ATTD_OFFWTIME,'HH24:MI:SS') ATTD_OFFHMS,
+								TRUNC((TO_DATE( TO_CHAR(ATTD_OFFWTIME, 'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS')-TO_DATE( TO_CHAR(ATTD_GTWTIME, 'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS'))*24) ||':'||
+								TRUNC(MOD((TO_DATE( TO_CHAR(ATTD_OFFWTIME, 'YYYYMMDDHH24MISS') ,'YYYYMMDDHH24MISS') - TO_DATE(TO_CHAR(ATTD_GTWTIME, 'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS'))*24,1)*60) ||':'||
+								TRUNC(ROUND(MOD((TO_DATE( TO_CHAR(ATTD_OFFWTIME, 'YYYYMMDDHH24MISS') , 'YYYYMMDDHH24MISS') - TO_DATE(TO_CHAR(ATTD_GTWTIME, 'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS'))*24*60,1)*60))
+								AS TOTALTIME,
+									CASE
+										TO_CHAR(ATTD_GTWTIME,'D')
+											WHEN '1' THEN '일요일'
+											WHEN '2' THEN '월요일'
+											WHEN
+											'3' THEN '화요일'
+											WHEN '4' THEN '수요일'
+											WHEN '5' THEN '목요일'
+											WHEN '6' THEN '금요일'
+											WHEN '7' THEN '토요일'
+									END DAYNM,ATTD_WORKSHAPE, TRUNC((ATTD_OFFWTIME-ATTD_GTWTIME)*24*60) TOTALMIN
+							
+								FROM ATTENDANCE
+								WHERE ATTD_EMPID = #{attd_empid} AND ATTD_WORKSHAPE != 'GAT07'
+					AND ATTD_GTWTIME >= TRUNC(SYSDATE, 'IW')
+					AND ATTD_GTWTIME < TRUNC(SYSDATE, 'IW') + 7
+					ORDER BY ATTD_GTWTIME ASC
+		
+		]]>	
+	</select>
+	<!-- 개인의 주간별 근로시간 평균을 구한다 -->
+	<select id="selectAttendanceListByWeekAndAttdId" resultType="java.util.Map">
+
+					SELECT ATTD_EMPID ,
+								TO_CHAR(ATTD_GTWTIME, 'YYYY/MM') YYYYMM ,
+								TO_CHAR(ATTD_GTWTIME, 'IW') WEEK,
+							 	TO_CHAR(  TO_DATE(  AVG( TO_NUMBER( TO_CHAR( TO_DATE( (
+													 TRUNC((TO_DATE( TO_CHAR(ATTD_OFFWTIME, 'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS')-TO_DATE( TO_CHAR(ATTD_GTWTIME, 'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS'))*24) ||':'||
+													TRUNC(MOD((TO_DATE( TO_CHAR(ATTD_OFFWTIME, 'YYYYMMDDHH24MISS') ,'YYYYMMDDHH24MISS') - TO_DATE(TO_CHAR(ATTD_GTWTIME, 'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS'))*24,1)*60) ||':'||
+													TRUNC(ROUND(MOD((TO_DATE( TO_CHAR(ATTD_OFFWTIME, 'YYYYMMDDHH24MISS') , 'YYYYMMDDHH24MISS') - TO_DATE(TO_CHAR(ATTD_GTWTIME, 'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS'))*24*60,1)*60))
+													) ,'HH24:MI:SS') ,'SSSSS') ) ) ,'SSSSS'), 'HH24:MI:SS') TIME
+							FROM ATTENDANCE
+							GROUP BY TO_CHAR(ATTD_GTWTIME, 'IW'),TO_CHAR(ATTD_GTWTIME, 'YYYY/MM'),ATTD_EMPID
+							HAVING ATTD_EMPID = #{attd_empid}
+				
+	</select>
+	
+	<sql id="search">
+		<if test="searchType == '1'.toString()">
+			and ATTD_WORKSHAPE = 'GAT01'
+			and EMP_NM like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == '2'.toString()">
+			and ATTD_WORKSHAPE = 'GAT02'
+			and EMP_NM like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == '3'.toString()">
+			and ATTD_WORKSHAPE = 'GAT03'
+			and EMP_NM like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == '4'.toString()">
+			and ATTD_WORKSHAPE = 'GAT04'
+			and EMP_NM like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == '5'.toString()">
+			and ATTD_WORKSHAPE = 'GAT05'
+			and EMP_NM like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == '6'.toString()">
+			and ATTD_WORKSHAPE = 'GAT06'
+			and EMP_NM like '%'||#{keyword}||'%'
+		</if>
+		</sql>
+	
+	<select id="selectAllAttendanceListByCompno" resultType="roleAttdCom" >
+	
+	SELECT *
+		FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+		        FROM(
+	SELECT A.*,
+		CASE A.ATTD_WORKSHAPE WHEN 'GAT01' THEN '정상처리'
+		WHEN 'GAT02' THEN '근무이상'
+		WHEN 'GAT03' THEN '출근'
+		WHEN 'GAT04' THEN '외근/출장'
+		WHEN 'GAT05' THEN '휴가'
+		WHEN 'GAT06' THEN '수정요청'
+		WHEN 'GAT07' THEN '비활성화'
+		END ATTD_WSNM,
+		TRUNC(ATTD_OFFWTIME-ATTD_GTWTIME+1) days,E.EMP_COMPNO COMP_NO, E.EMP_NM EMP_NM ,D.DEPT_NO DEPT_NO,
+		D.DEPT_NM ,RANK_NO,RANK_NM
+		FROM ATTENDANCE A, EMPLOYEE E , DEPARTMENT D,RANK R
+		WHERE E.EMP_ID = A.ATTD_EMPID AND D.DEPT_NO = E.EMP_DEPTNO AND R.RANK_NO = E.EMP_RANKNO 
+	) A	
+	  WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>)
+		WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+	
+	</select>
+	
+	<select id="selectAttdListTotalCnt" resultType="int">
+	
+		SELECT COUNT(*)
+		FROM ATTENDANCE A, EMPLOYEE E , DEPARTMENT D,RANK R
+		WHERE E.EMP_ID = A.ATTD_EMPID AND D.DEPT_NO = E.EMP_DEPTNO AND R.RANK_NO = E.EMP_RANKNO 
+		AND E.EMP_COMPNO = #{comp_no} AND E.EMP_ACTVYN = 'Y'<include refid="search"/>
+		
+	</select>
+	
+	<select id="selectTodayGoToWorkCnt" resultType="int">
+	
+	SELECT COUNT(DISTINCT ATTD_EMPID) TODAYATTDCNT
+    FROM ATTENDANCE
+    WHERE TO_CHAR(ATTD_GTWTIME,'yyyyMMdd') = TO_CHAR(SYSDATE,'YYYYMMDD')
+    AND ATTD_WORKSHAPE = 'GAT03' 
+    AND (SELECT EMP_COMPNO FROM EMPLOYEE WHERE ATTD_EMPID = EMP_ID) = #{comp_no ,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectTodayOffWorkCnt" resultType="int">
+	
+	SELECT COUNT(DISTINCT ATTD_EMPID) TODAYOFFCNT FROM ATTENDANCE
+	WHERE  TO_CHAR(ATTD_OFFWTIME,'yyyyMMdd') = TO_CHAR(SYSDATE,'YYYYMMDD') AND ATTD_WORKSHAPE = 'GAT01'
+  AND (SELECT EMP_COMPNO FROM EMPLOYEE WHERE ATTD_EMPID = EMP_ID) = #{comp_no,jdbcType=INTEGER}
+	
+	</select>
+	<select id="selectTodayModifyReqUserCnt" resultType="int" >
+	 
+	SELECT COUNT(ATTD_NO) MODREQCNT FROM ATTENDANCE WHERE  ATTD_WORKSHAPE  ='GAT06'
+  AND (SELECT EMP_COMPNO FROM EMPLOYEE WHERE ATTD_EMPID = EMP_ID) = #{comp_no,jdbcType=INTEGER}
+	
+	</select>
+	
+	<select id="selectDetailAttendByAttdNo" resultType="java.util.Map" parameterType="int">
+	
+	SELECT  ATTD_NO, ATTD_EMPID,  TO_CHAR(ATTD_GTWTIME,'YYYY-MM-DD HH24:MI:SS') ATTD_GTWTIME, TO_CHAR(ATTD_OFFWTIME,'YYYY-MM-DD HH24:MI:SS') ATTD_OFFWTIME, ATTD_LAT, ATTD_LNG,  ATTD_AREA, ATTD_WORKSHAPE,
+		CASE A.ATTD_WORKSHAPE WHEN 'GAT01' THEN '정상처리'
+		WHEN 'GAT02' THEN '근무이상'
+		WHEN 'GAT03' THEN '출근'
+		WHEN 'GAT04' THEN '외근/출장'
+		WHEN 'GAT05' THEN '휴가'
+		WHEN 'GAT06' THEN '수정요청'
+		WHEN 'GAT07' THEN '비활성화'
+		END ATTD_WSNM,
+		TRUNC(ATTD_OFFWTIME-ATTD_GTWTIME+1) days,E.EMP_COMPNO COMP_NO, E.EMP_NM EMP_NM ,D.DEPT_NO DEPT_NO,
+		D.DEPT_NM ,RANK_NO,RANK_NM
+		FROM ATTENDANCE A, EMPLOYEE E , DEPARTMENT D,RANK R
+		WHERE E.EMP_ID = A.ATTD_EMPID AND D.DEPT_NO = E.EMP_DEPTNO AND R.RANK_NO = E.EMP_RANKNO  AND A.ATTD_NO = #{attd_no}
+	
+	</select>
+	
+	<select id="selectlatecPersonCnt" resultType="int">
+	  <![CDATA[
+	   SELECT COUNT(ATTD_EMPID) FROM ATTENDANCE
+        WHERE  TO_DATE(TO_CHAR(ATTD_GTWTIME ,'YYYYMMDD'),'YYYYMMDD') = TO_DATE( TO_CHAR(SYSDATE,'YYYYMMDD') ,'YYYYMMDD' ) 
+         AND   TO_DATE( TO_CHAR(ATTD_GTWTIME, 'YYYYMMDDHH24MI'), 'YYYYMMDDHH24MI') > TO_DATE( TO_CHAR(SYSDATE,'YYYYMMDD') || '0859','YYYYMMDDHH24MI')
+         AND  (SELECT EMP_COMPNO FROM EMPLOYEE WHERE ATTD_EMPID = EMP_ID) = #{comp_no,jdbcType=INTEGER}
+			]]>	
+	</select>
+	<select id="selectlatecPersonByAttdNo" parameterType="int" resultType="int">
+	  <![CDATA[
+	 			 SELECT ATTD_NO FROM ATTENDANCE
+                WHERE  TO_DATE(TO_CHAR(ATTD_GTWTIME ,'YYYYMMDD'),'YYYYMMDD') = TO_DATE( TO_CHAR(SYSDATE,'YYYYMMDD') ,'YYYYMMDD' ) 
+                 AND   TO_DATE( TO_CHAR(ATTD_GTWTIME, 'YYYYMMDDHH24MI'), 'YYYYMMDDHH24MI') > TO_DATE( TO_CHAR(SYSDATE,'YYYYMMDD') || '0859','YYYYMMDDHH24MI')
+	  
+	  			AND ATTD_NO = #{attd_no}
+	  	]]>	
+	</select>
+	
+	<select id="selectVacatIngToday" resultType="int">
+		SELECT COUNT(*)
+		FROM VACATION
+		WHERE ( TO_DATE(SYSDATE,'YY/MM/DD') BETWEEN  VACT_SATYMD AND VACT_ENDYMD) AND VACT_APRVYN = 'Y' AND  VACT_COMPNO = #{comp_no}
+	</select>
+	<select id="checkLateDateByAttdgtwtime" parameterType="str" resultType="int">
+	 <![CDATA[
+	 
+	 	SELECT COUNT(*) FROM dual 
+	 	WHERE TO_CHAR( TO_DATE(#{attd_gtwtime},'YYYY-MM-DD HH24:MI:SS'),'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
+	 	AND
+			TO_DATE(TO_CHAR( TO_DATE(#{attd_gtwtime},'YYYY-MM-DD HH24:MI:SS'),'YYYYMMDDHH24MI'),'YYYYMMDDHH24MI') > 
+			TO_DATE( TO_CHAR(SYSDATE,'YYYYMMDD') || '0859','YYYYMMDDHH24MI')
+	 
+	 
+	  	]]>	
+	
+	</select>
+</mapper>

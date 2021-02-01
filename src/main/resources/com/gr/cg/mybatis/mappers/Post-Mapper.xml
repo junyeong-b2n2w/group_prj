@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Post-Mapper" >
+	
+	<update id="insertPost" parameterType="post">
+		insert into 
+		post(
+			POST_NO,
+			POST_BRDNO,
+			POST_TITLE,
+			POST_CONT,
+			POST_PBLS,
+			POST_PPOST,
+			POST_ATTCKEY,
+			POST_COMPNO
+			)
+		values( #{post_no},#{post_brdno}, #{post_title}, #{post_cont}, #{post_pbls},#{post_ppost,jdbcType=NUMERIC},#{post_attckey,jdbcType=VARCHAR}
+				,#{post_compno}
+			
+				)
+	</update>
+	
+	
+	
+	
+	<update id="deletePost" parameterType="int">
+		delete 
+		from post
+		where post_no = #{post_no} 
+	</update>
+	
+	<select id="selectFileList" resultType="attach" parameterType="int">
+	
+			
+			SELECT C.*
+			FROM post A, ATTACHMENTS C
+			WHERE A.POST_ATTCKEY = C.ATTC_KEY
+	        AND A.post_NO = #{post_no} AND ATTC_DELETYN = 'N'
+	
+	</select>
+	
+	<select id="selectAkNoListByKey" parameterType="str">
+		SELECT * FROM ATTACHMENT WHERE ATTC_KEY =#{ak}
+	</select>
+	
+	
+	<update id="modifyPost" parameterType="int">
+		update post
+		set POST_TITLE = #{post_title} , POST_CONT = #{post_cont} , POST_ATTCKEY = #{post_attckey,jdbcType=VARCHAR}
+		where post_no = #{post_no}
+	</update>
+	
+	<select id="selectPostByPostNo" resultType="post" parameterType="int">
+		select *
+		from post
+		where post_no = #{post_no}
+	</select>
+	
+	<select id="selectWidget" parameterType="int" resultType="post">
+		    select *
+		    
+		    from(SELECT  post_no post_no,
+										post_brdno,
+										post_title,
+										post_cont,
+										post_regdt,
+										post_udtdt,
+										post_pbls,
+										post_ppost,
+										post_delyn,
+										post_views,
+										post_attckey,
+                                        EMP_COMPNO post_compno
+										
+		FROM post,EMPLOYEE
+        where post.post_pbls = EMPLOYEE.EMP_ID and EMPLOYEE.EMP_COMPNO = #{post_compno} and post.POST_PPOST is null
+        order by post_no desc)
+        where rownum &lt;= 4
+		
+	</select>
+	
+	
+	
+	<select id="selectPostList" resultType="post" >
+	
+ SELECT *
+FROM (SELECT A.*,ROWNUM AS RNUM,COUNT(*) OVER() AS TOTALCNT, ${page} AS PAGE, ${displaypage} AS displaypage, ${perPageNum} AS perpagenum
+FROM(SELECT LPAD(' ',(LEVEL-1)*4) || post_no post_no,
+										post_brdno,
+										post_title,
+										post_cont,
+										post_regdt,
+										post_udtdt,
+										post_pbls,
+										post_ppost,
+										post_delyn,
+										post_views,
+										post_attckey,
+										level
+										
+		FROM post
+		where post_brdno = #{searchno}
+		START WITH post_ppost IS NULL 
+		CONNECT BY PRIOR post_no = post_ppost) A
+WHERE ${primarykey} IS NOT NULL <include refid="include.search2"/>)
+WHERE RNUM &gt; #{start} AND RNUM &lt;= #{end}
+	</select>
+	
+	<select id="selectPostListCount" resultType="int">
+		SELECT
+		COUNT(*) 
+		FROM POST
+		WHERE POST_NO IS NOT NULL
+	</select>
+	
+	
+	
+	<select id="selectPostSequenceNextValue" resultType="int">
+		select post_seq.nextVal
+		from dual
+	</select>
+	
+	<update id="increaseViews" parameterType="int">
+		update post
+		set post_views=post_views+1
+		where post_no=#{post_no}
+	</update>
+
+</mapper>
